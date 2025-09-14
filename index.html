@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seattle Trading — Medical Gloves</title>
+  <meta name="description" content="Premium nitrile, latex, and vinyl gloves for medical and industrial use.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+
+<!-- Site header & navigation (appears on every page) -->
+  
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="home.html" aria-label="Seattle Trading home">
+
+      <!-- Change to <img src="assets/logo.png" alt="Seattle Trading Logo" class="logo">-->
+      <div class="logo">ST</div>
+      <span>Seattle Trading</span>
+    </a>
+    <nav aria-label="Primary">
+      <a href="home.html" aria-current="page">Home</a>
+      <a href="catalog.html" >Catalog</a>
+      <a href="about.html" >About</a>
+      <a href="support.html" >Support</a>
+      <a href="catalog.html" class="cta">Shop gloves</a>
+      <a href="cart.html" class="cart-link" aria-label="View cart">
+        <svg class="cart-icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M7 4h-2l-1 2h-2v2h2l3.6 7.59c.17.33.52.41.74.41h9.66v-2h-9.06l-.3-.59l10.02-1.82l1.94-7.59h-14.64l-.36-1h-2zM7 20a2 2 0 1 0 .001-4.001A2 2 0 0 0 7 20zm10 0a2 2 0 1 0 .001-4.001A2 2 0 0 0 17 20z"/>
+        </svg>
+        <span id="cart-count" class="cart-badge" aria-live="polite">0</span>
+      </a>
+      <a href="account.html" id="account-link">Account</a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- Main content area for this page -->
+
+  <main class="container">
+    <!-- Hero / welcome section (intro headline & call-to-action) -->
+<section class="hero">
+      <!-- Two-column layout: text on left, signup card on right -->
+<div class="hero-inner">
+        <div>
+          <h1>Reliable gloves for healthcare, labs, and industry.</h1>
+          <p>Seattle Trading supplies high-quality nitrile, latex, and vinyl gloves—ready to ship.</p>
+          <div class="cta-group">
+            <a href="catalog.html" class="cta">Browse Catalog</a>
+            <a href="support.html" class ="btn-outline">Bulk & wholesale</a>
+          </div>
+        </div>
+        <div class="card">
+          <h2 style="margin-top:0;">Stay in the loop</h2>
+          <p class="muted">Drop your info and we’ll contact you about availability, bulk pricing, and promotions.</p>
+          <!-- Enhanced form: handled by js/app.js (prevents page reload, shows alert) -->
+<form data-enhanced="true" class="form">
+  <div class="form-grid">
+    <div class="form-col">
+      <label for="first-name">First Name *</label>
+      <input id="first-name" name="first-name" class="input" placeholder="John" autocomplete="given-name" required>
+
+      <label for="last-name">Last Name *</label>
+      <input id="last-name" name="last-name" class="input" placeholder="Doe" autocomplete="family-name" required>
+    </div>
+
+    <div class="form-col">
+      <label for="email">Email *</label>
+      <input id="email" type="email" name="email" class="input" placeholder="example@email.com" autocomplete="email" required>
+
+      <label for="phone">Phone</label>
+      <input id="phone" name="phone" class="input" placeholder="(555) 555-5555" autocomplete="tel">
+    </div>
+  </div>
+
+  <button class="cta" type="submit">Contact me</button>
+</form>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Best sellers</h2>
+      <div id="bestsellers" class="grid"></div>
+    </section>
+  </main>
+
+
+<!-- Site-wide footer (links & legal) -->
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns">
+      <div>
+        <strong>Seattle Trading</strong>
+        <small>Premium Medical & Industrial Gloves</small>
+      </div>
+      <div>
+        <div><a href="catalog.html">Shop Catalog</a></div>
+        <div><a href="about.html">About Us</a></div>
+        <div><a href="support.html">Support</a></div>
+      </div>
+      <div>
+        <div><a href="returns.html">Shipping & Returns</a></div>
+        <div><a href="privacy.html">Privacy Policy</a></div>
+        <div><a href="terms.html">Terms & Conditions</a></div>
+      </div>
+      <div>
+        <small>© <span id="year"></span> Seattle Trading. All rights reserved.</small>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <script src="js/app.js"></script>
+  <button id="theme-toggle">🌙</button>
+</body>
+</html>
