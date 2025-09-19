@@ -599,7 +599,7 @@ async function startPayment(e) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: 'https://seattletrading.org/'
+        return_url: 'https://seattletrading.org/thankyou.html'
     // ❌ don’t pass shipping here
   }
 });
