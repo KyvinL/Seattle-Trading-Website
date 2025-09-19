@@ -1,8 +1,5 @@
-// Simple product data and rendering for Seattle Trading
 // =============================================================
 // Seattle Trading — app.js
-// Purpose: Render products, manage a tiny cart with localStorage,
-// filter/sort the catalog, and handle simple forms.
 // =============================================================
 
 const API_BASE = 'https://api.seattletrading.org';
@@ -139,9 +136,10 @@ function cartItemRowHTML(item, product) {
   `;
 }
 
+// Cart Page
 function renderCartPage() {
   const page = document.getElementById('cart-page');
-  if (!page) return; // not on cart page
+  if (!page) return;
 
   const emptyBox = document.getElementById('cart-empty');
   const hasBox   = document.getElementById('cart-has-items');
@@ -250,7 +248,7 @@ function updateFooterMeta() {
   }
 }
 
-// --- "Login Lite" (client-only) ---------------------------------
+// Login Lite (client-only)
 const USER_KEY = 'st_user';
 
 function getUser() {
@@ -263,7 +261,7 @@ function clearUser() {
   localStorage.removeItem(USER_KEY);
 }
 
-// --- Orders (client-side history) -------------------------------
+// Orders (client-side history)
 const ORDERS_KEY = 'st_orders_v1';
 function getOrders() {
   try { return JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]'); } catch { return []; }
@@ -285,7 +283,7 @@ function wireAccountUI() {
 
   if (user && user.name) {
     link.textContent = `Hi, ${user.name.split(' ')[0] || 'there'}`;
-    link.href = 'account.html';     // 👉 go to account page
+    link.href = 'account.html';
     link.onclick = null;
   } else {
     link.textContent = 'Login';
@@ -431,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// --- Simple totals for reuse ---
+// Simple totals for reuse
 function computeCartTotals() {
   const cart = getCart();
   let items = 0, subtotal = 0;
@@ -500,7 +498,7 @@ function wireCheckoutTax() {
     if (payBtn) payBtn.disabled = true;
     if (msgEl)  msgEl.textContent = 'Calculating tax…';
 
-    // ✅ Ask server for a *tax preview*
+    // Ask server for a tax preview
     // Require a complete address before hitting the server
 const s = currentShipping();
 const addr = s.address || {};
@@ -523,17 +521,17 @@ const resp = await fetch(`${API_BASE}/tax-preview`, {
 const data = await resp.json();
 if (!resp.ok) throw new Error(data.error || 'Tax preview failed');
 
-latestCalcId = data.id;                      // keep this
+latestCalcId = data.id;                 
 const { items: itemsCount } = computeCartTotals();
 if (itemsEl) itemsEl.textContent = itemsCount;
 
-const serverSubtotalC = Number(data.subtotal || 0); // cents
-const serverTaxC      = Number(data.tax || 0);      // cents
+const serverSubtotalC = Number(data.subtotal || 0);
+const serverTaxC      = Number(data.tax || 0);
 
 // If the server somehow sent subtotal=0 for a non-empty cart, reconstruct from total-tax
 let displaySubtotalC = serverSubtotalC;
 if (itemsCount > 0 && serverSubtotalC === 0) {
-  displaySubtotalC = Math.max(0, (Number(data.total || 0) - serverTaxC)); // still cents
+  displaySubtotalC = Math.max(0, (Number(data.total || 0) - serverTaxC));
 }
 
 // Paint (cents → dollars)
@@ -541,8 +539,8 @@ if (subEl) subEl.textContent = formatUSD(displaySubtotalC / 100);
 if (taxEl) taxEl.textContent = formatUSD(serverTaxC / 100);
 if (totEl) totEl.textContent = formatUSD((displaySubtotalC + serverTaxC) / 100);
 
-// ✅ Save computed total instead of serverTotalC
-const computedTotalC = displaySubtotalC + serverTaxC; // cents
+// Save computed total instead of serverTotalC
+const computedTotalC = displaySubtotalC + serverTaxC;
 sessionStorage.setItem('last_totals', JSON.stringify({
   subtotal_c: displaySubtotalC,
   tax_c:      serverTaxC,
@@ -559,9 +557,9 @@ if (payBtn) payBtn.disabled = false;
   }
 }
 
-// --- Stripe (client) single-use wiring ---
+// Stripe (client) payment shit
 let stripe, elements, paymentElement;
-const STRIPE_PK = 'pk_test_51S4pfCPtRDwYgoxeTaTjZHk2bORnbHwkB1iYWW2t0a7SseAUHTQb3yaQ8wroQGtsyaDRThQ8ChGuCdYcNhP5UmZz00qUy42VQt'; // your pk_test key
+const STRIPE_PK = 'pk_test_51S4pfCPtRDwYgoxeTaTjZHk2bORnbHwkB1iYWW2t0a7SseAUHTQb3yaQ8wroQGtsyaDRThQ8ChGuCdYcNhP5UmZz00qUy42VQt'; // pk_test key
 
 async function startPayment(e) {
   e?.preventDefault?.();
@@ -600,7 +598,7 @@ async function startPayment(e) {
       elements,
       confirmParams: {
         return_url: 'https://seattletrading.org/thankyou.html'
-    // ❌ don’t pass shipping here
+    // No shipping
   }
 });
 
@@ -614,7 +612,7 @@ async function startPayment(e) {
   }
 }
 
-// 🔗 Hook the button
+
 payBtn?.addEventListener('click', startPayment);
 
   // Recompute when user edits address
@@ -631,7 +629,7 @@ payBtn?.addEventListener('click', startPayment);
   optimisticPaint();
   recalc();
 
-  // Expose a getter so payment step can use the latest calc_id
+  // Getterso payment step can use the latest calc_id
   window.getLatestTaxCalcId = () => latestCalcId;
 }
 

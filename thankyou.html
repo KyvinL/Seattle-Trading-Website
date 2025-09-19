@@ -1,94 +1,100 @@
+<!-- ============================================================= --> 
+<!-- Seattle Trading — thankyou.html --> 
+<!-- ============================================================= --> 
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Thank You — Seattle Trading</title>
-  <meta name="description" content="Order confirmation for Seattle Trading.">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Thank You — Seattle Trading</title>
+    <meta name="description" content="Order confirmation for Seattle Trading.">
 
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
 
-    <script>
-        localStorage.removeItem("seattle_trading_cart_v1");
+  <body>
+    <!-- Remove items from cart when you pay -->
+      <script>
+          localStorage.removeItem("seattle_trading_cart_v1");
+      </script>
+
+    <header class="header">
+      <div class="container nav">
+        <a class="brand" href="index.html" aria-label="Seattle Trading home">
+          <div class="logo">ST</div><span>Seattle Trading</span>
+        </a>
+        <nav aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="catalog.html">Catalog</a>
+          <a href="about.html">About</a>
+          <a href="support.html">Support</a>
+          <a href="account.html" id="account-link">Account</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container section">
+      <div class="card" style="text-align:center;">
+        <h1>🎉 Thank You!</h1>
+        <p>Your payment was successful. We’re processing your order and will notify you once it ships.</p>
+        <div class="cta-group">
+          <a href="catalog.html" class="cta">Continue Shopping</a>
+          <a href="support.html" class="btn-outline">Need help?</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="columns">
+          <div>
+            <strong>Seattle Trading</strong>
+            <small>Premium Medical & Industrial Gloves</small>
+          </div>
+          <div>
+            <div><a href="catalog.html">Shop Catalog</a></div>
+            <div><a href="about.html">About Us</a></div>
+            <div><a href="support.html">Support</a></div>
+          </div>
+          <div>
+            <div><a href="returns.html">Shipping & Returns</a></div>
+            <div><a href="privacy.html">Privacy Policy</a></div>
+            <div><a href="terms.html">Terms & Conditions</a></div>
+          </div>
+          <div>
+            <small>© <span id="year"></span> Seattle Trading. All rights reserved.</small>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Shows order summary, I think, IDK how to -->
+    <script src="js/app.js"></script>
+        <script>
+      (function () {
+        try {
+          const p = new URLSearchParams(location.search);
+          const id = p.get('payment_intent');
+          const st = p.get('redirect_status') || 'succeeded';
+
+          const snap   = JSON.parse(sessionStorage.getItem('last_order')   || '[]');
+          const totals = JSON.parse(sessionStorage.getItem('last_totals')  || '{}');
+
+          const items = Array.isArray(snap) ? snap.reduce((n,i)=>n+(i.qty||1),0) : 0;
+          const total_c = Number(totals.total_c || 0);     // 👈 charged amount (cents)
+          const subtotal_c = Number(totals.subtotal_c || 0);
+
+          if (id && typeof pushOrder === 'function') {
+            pushOrder({ id, status: st, items, total_c, subtotal_c });
+          }
+        } catch (_) {}
+
+        // cleanup
+        sessionStorage.removeItem('last_order');
+        sessionStorage.removeItem('last_totals');
+      })();
     </script>
-
-  <header class="header">
-    <div class="container nav">
-      <a class="brand" href="index.html" aria-label="Seattle Trading home">
-        <div class="logo">ST</div><span>Seattle Trading</span>
-      </a>
-      <nav aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="catalog.html">Catalog</a>
-        <a href="about.html">About</a>
-        <a href="support.html">Support</a>
-        <a href="account.html" id="account-link">Account</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container section">
-    <div class="card" style="text-align:center;">
-      <h1>🎉 Thank You!</h1>
-      <p>Your payment was successful. We’re processing your order and will notify you once it ships.</p>
-      <div class="cta-group">
-        <a href="catalog.html" class="cta">Continue Shopping</a>
-        <a href="support.html" class="btn-outline">Need help?</a>
-      </div>
-    </div>
-  </main>
-
-<footer class="footer">
-  <div class="container">
-    <div class="columns">
-      <div>
-        <strong>Seattle Trading</strong>
-        <small>Premium Medical & Industrial Gloves</small>
-      </div>
-      <div>
-        <div><a href="catalog.html">Shop Catalog</a></div>
-        <div><a href="about.html">About Us</a></div>
-        <div><a href="support.html">Support</a></div>
-      </div>
-      <div>
-        <div><a href="returns.html">Shipping & Returns</a></div>
-        <div><a href="privacy.html">Privacy Policy</a></div>
-        <div><a href="terms.html">Terms & Conditions</a></div>
-      </div>
-      <div>
-        <small>© <span id="year"></span> Seattle Trading. All rights reserved.</small>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script src="js/app.js"></script>
-    <script>
-  (function () {
-    try {
-      const p = new URLSearchParams(location.search);
-      const id = p.get('payment_intent');
-      const st = p.get('redirect_status') || 'succeeded';
-
-      const snap   = JSON.parse(sessionStorage.getItem('last_order')   || '[]');
-      const totals = JSON.parse(sessionStorage.getItem('last_totals')  || '{}');
-
-      const items = Array.isArray(snap) ? snap.reduce((n,i)=>n+(i.qty||1),0) : 0;
-      const total_c = Number(totals.total_c || 0);     // 👈 charged amount (cents)
-      const subtotal_c = Number(totals.subtotal_c || 0);
-
-      if (id && typeof pushOrder === 'function') {
-        pushOrder({ id, status: st, items, total_c, subtotal_c });
-      }
-    } catch (_) {}
-
-    // cleanup
-    sessionStorage.removeItem('last_order');
-    sessionStorage.removeItem('last_totals');
-  })();
-</script>
-  <button id="theme-toggle">🌙</button>
-</body>
+    <button id="theme-toggle">🌙</button>
+  </body>
 </html>
