@@ -88,6 +88,23 @@ function addToCart(id) {
   updateFooterMeta();
 }
 
+// --- Helpers for dynamic thank-you ---
+function compactCart() {
+  try {
+    const raw = JSON.parse(localStorage.getItem('seattle_trading_cart_v1') || '[]');
+    // store a compact, metadata-safe version (cents not dollars)
+    return raw.map(i => {
+      // look up price from PRODUCTS table
+      const p = (typeof PRODUCTS !== 'undefined') ? PRODUCTS.find(x => x.id === i.id) : null;
+      const price_cents = Math.round(((p?.price ?? 0) * 100));
+      return { id: i.id, qty: i.qty || 1, p: price_cents };
+    });
+  } catch { return []; }
+}
+
+const ORIGIN = window.location.origin;                  // e.g., http://127.0.0.1:5500
+const THANK_YOU_URL = `${ORIGIN}/thankyou.html`;       // central place to change later
+
 // CATALOG (filters + render) ----------------------------------
 function renderCatalog() {
   const mount = getQuery('#catalog-grid');
@@ -574,38 +591,59 @@ async function startPayment(e) {
     payBtn.disabled = true;
     if (msgEl) msgEl.textContent = 'Initializing payment…';
 
+    // 👇 Include calc_id + shipping + customer fields + compact cart
     const resp = await fetch(`${API_BASE}/create-payment-intent`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ calc_id: latestCalcId, shipping })
-});
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        calc_id: latestCalcId,
+        shipping,
+        // if you add an email input later (e.g., #ship-email), this will pick it up
+        email: document.getElementById('ship-email')?.value || '',
+        name: shipping?.name || '',
+        cart: compactCart()
+      })
+    });
 
     const data = await resp.json();
     if (!resp.ok || !data.clientSecret) throw new Error(data.error || 'Init failed');
 
     if (!stripe) stripe = Stripe(STRIPE_PK);
     if (!elements) {
-      elements = stripe.elements({ clientSecret: data.clientSecret });
+      elements = stripe.elements({ clientSecret: data.clientSecret });s
       paymentElement = elements.create('payment');
       paymentElement.mount('#payment-element');
     } else {
       elements.update({ clientSecret: data.clientSecret });
     }
 
+    // keep your local “what I tried to buy” snapshot (optional)
     sessionStorage.setItem("last_order", JSON.stringify(getCart()));
 
-    const { error } = await stripe.confirmPayment({
+    // ✅ Confirm payment with smart redirect handling
+    const result = await stripe.confirmPayment({
       elements,
-      confirmParams: {
-        return_url: 'https://seattletrading.org/thankyou.html'
-    // No shipping
-  }
-});
+      confirmParams: { return_url: THANK_YOU_URL },
+      // redirect: THANK_YOU_URL   // cards won't leave the page; wallets/redirect methods will
+    });
 
-    if (error) {
+    if (result?.error) {
+      // card errors or immediate failures
+      if (msgEl) msgEl.textContent = result.error.message || 'Payment failed. Please try again.';
       payBtn.disabled = false;
-      if (msgEl) msgEl.textContent = error.message || 'Payment failed. Please try again.';
+      return;
     }
+
+    const pi = result?.paymentIntent;
+    if (pi && (pi.status === 'succeeded' || pi.status === 'processing')) {
+      // show dynamic order summary on thank-you page
+      window.location.href = `${THANK_YOU_URL}?pi=${encodeURIComponent(pi.id)}`;
+      return;
+    }
+
+    // If we got here, it likely requires_action (handled by automatic redirect) or is unexpected
+    if (msgEl) msgEl.textContent = 'Additional authentication required or unexpected status.';
+    payBtn.disabled = false;
   } catch (err) {
     payBtn.disabled = false;
     if (msgEl) msgEl.textContent = err.message || 'Error initializing payment.';
