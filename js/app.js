@@ -6,9 +6,9 @@ const API_BASE = 'https://api.seattletrading.org';
 
 // PRODUCT DATA -------------------------------------------------
 const PRODUCTS = [
-  { id: "st-nitrile-blue-100",  
-    name: "Nitrile Exam Gloves — Blue (Box of 100)",  
-    price: 12.99, 
+  { id: "qube-nitrile-exam-10bx",  
+    name: "Qube Nitrile Examination Gloves (Case - 10 Boxes)",  
+    price: 54.99, 
     bestseller: true,  size: ["S","M","L","XL"], 
     material: "Nitrile", 
     powderFree: true,  
