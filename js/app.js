@@ -508,7 +508,8 @@ if (!addr.line1 || !addr.city || !addr.state || !addr.postal_code || !addr.count
   if (payBtn) payBtn.disabled = true;
   return;
 }
-    const resp = await fetch('http://localhost:4242/tax-preview', {
+
+const resp = await fetch(`${API_BASE}/tax-preview`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -516,6 +517,7 @@ if (!addr.line1 || !addr.city || !addr.state || !addr.postal_code || !addr.count
     shipping: currentShipping()
   })
 });
+
 const data = await resp.json();
 if (!resp.ok) throw new Error(data.error || 'Tax preview failed');
 
@@ -572,11 +574,12 @@ async function startPayment(e) {
     payBtn.disabled = true;
     if (msgEl) msgEl.textContent = 'Initializing payment…';
 
-    const resp = await fetch('http://localhost:4242/create-payment-intent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ calc_id: latestCalcId, shipping })
-    });
+    const resp = await fetch(`${API_BASE}/create-payment-intent`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ calc_id: latestCalcId, shipping })
+});
+
     const data = await resp.json();
     if (!resp.ok || !data.clientSecret) throw new Error(data.error || 'Init failed');
 
@@ -594,7 +597,7 @@ async function startPayment(e) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: 'http://localhost:5500/thankyou.html'
+        return_url: 'https://seattletrading.org/'
     // ❌ don’t pass shipping here
   }
 });
