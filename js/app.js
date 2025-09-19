@@ -5,6 +5,8 @@
 // filter/sort the catalog, and handle simple forms.
 // =============================================================
 
+const API_BASE = 'https://api.seattletrading.org';
+
 // PRODUCT DATA -------------------------------------------------
 const PRODUCTS = [
   { id: "st-nitrile-blue-100",  
