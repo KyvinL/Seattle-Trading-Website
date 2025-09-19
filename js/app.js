@@ -611,7 +611,7 @@ const resp = await fetch(`${API_BASE}/create-payment-intent`, {
 
     if (!stripe) stripe = Stripe(STRIPE_PK);
     if (!elements) {
-      elements = stripe.elements({ clientSecret: data.clientSecret });s
+      elements = stripe.elements({ clientSecret: data.clientSecret });
       paymentElement = elements.create('payment');
       paymentElement.mount('#payment-element');
     } else {
