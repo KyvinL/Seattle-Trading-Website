@@ -37,6 +37,7 @@
     <main class="container section">
       <div class="card" style="text-align:center;">
         <h1>🎉 Thank You!</h1>
+        <div id="order-summary" class="card" style="margin-top:16px; padding:16px;"></div>
         <p>Your payment was successful. We’re processing your order and will notify you once it ships.</p>
         <div class="cta-group">
           <a href="catalog.html" class="cta">Continue Shopping</a>
@@ -72,28 +73,92 @@
     <!-- Shows order summary, I think, IDK how to -->
     <script src="js/app.js"></script>
         <script>
-      (function () {
-        try {
-          const p = new URLSearchParams(location.search);
-          const id = p.get('payment_intent');
-          const st = p.get('redirect_status') || 'succeeded';
+            (function () {
+          // Read PI from URL (works for both card and redirect-based methods)
+          const params = new URLSearchParams(location.search);
+          const pi = params.get('pi') || params.get('payment_intent');
+          const statusFromQuery = params.get('redirect_status'); // may be null
 
-          const snap   = JSON.parse(sessionStorage.getItem('last_order')   || '[]');
-          const totals = JSON.parse(sessionStorage.getItem('last_totals')  || '{}');
+          const mount = document.getElementById('order-summary');
+          if (!mount) return;
 
-          const items = Array.isArray(snap) ? snap.reduce((n,i)=>n+(i.qty||1),0) : 0;
-          const total_c = Number(totals.total_c || 0);     // 👈 charged amount (cents)
-          const subtotal_c = Number(totals.subtotal_c || 0);
-
-          if (id && typeof pushOrder === 'function') {
-            pushOrder({ id, status: st, items, total_c, subtotal_c });
+          if (!pi) {
+            mount.innerHTML = `<p>We couldn’t find your order ID. If you paid, check your email for a receipt.</p>`;
+            return;
           }
-        } catch (_) {}
 
-        // cleanup
-        sessionStorage.removeItem('last_order');
-        sessionStorage.removeItem('last_totals');
-      })();
+          // Local dev vs prod API origin
+          const API_ORIGIN = (location.hostname === '127.0.0.1' || location.hostname === 'localhost')
+            ? 'http://localhost:4242'
+            : 'https://api.seattletrading.org';
+
+          // Fetch order details from your server
+          fetch(`${API_ORIGIN}/pi/${encodeURIComponent(pi)}`)
+            .then(r => r.json())
+            .then(({ ok, order, error }) => {
+              if (!ok || !order) throw new Error(error || 'Order not found');
+
+              // Build items table from compact cart (id, qty, p in cents)
+              const itemsHtml = (order.cart || []).map(i => `
+                <tr>
+                  <td style="padding:8px;">${i.id}</td>
+                  <td style="padding:8px; text-align:right;">${i.qty}</td>
+                  <td style="padding:8px; text-align:right;">$${(i.p/100).toFixed(2)}</td>
+                </tr>
+              `).join('') || `<tr><td colspan="3" style="padding:8px;">(No item details)</td></tr>`;
+
+              const totalUSD = (order.amount / 100).toFixed(2);
+              const status = order.status || statusFromQuery || 'succeeded';
+
+              mount.innerHTML = `
+                <h2 style="margin-top:0;">Order Summary</h2>
+                <div style="display:grid; gap:6px; margin-bottom:12px;">
+                  <div><strong>Order ID:</strong> ${order.id.slice(-8).toUpperCase()}</div>
+                  <div><strong>Status:</strong> ${status}</div>
+                  <div><strong>Name / Email:</strong> ${order.name || '—'}${order.email ? ' • ' + order.email : ''}</div>
+                  <div><strong>Total Paid:</strong> $${totalUSD} ${order.currency?.toUpperCase() || ''}</div>
+                  ${order.receipt_url ? `<div><a href="${order.receipt_url}" target="_blank" rel="noreferrer">View receipt</a></div>` : ''}
+                </div>
+
+                <div style="overflow:auto;">
+                  <table style="width:100%; border-collapse:separate; border-spacing:0 6px;">
+                    <thead>
+                      <tr class="muted">
+                        <th style="text-align:left; padding:8px;">Item</th>
+                        <th style="text-align:right; padding:8px;">Qty</th>
+                        <th style="text-align:right; padding:8px;">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>${itemsHtml}</tbody>
+                  </table>
+                </div>
+              `;
+
+              // Save to local account history (if your app.js provides pushOrder)
+              try {
+                if (typeof pushOrder === 'function') {
+                  const itemsCount = Array.isArray(order.cart) ? order.cart.reduce((n,i)=>n+(i.qty||1),0) : 0;
+                  pushOrder({
+                    id: order.id,
+                    status,
+                    items: itemsCount,
+                    total_c: order.amount,
+                    subtotal_c: (() => {
+                      const cents = Array.isArray(order.cart) ? order.cart.reduce((s,i)=>s+(i.p||0)*(i.qty||1),0) : 0;
+                      return Number.isFinite(cents) ? cents : 0;
+                    })()
+                  });
+                }
+              } catch (_) {}
+            })
+            .catch(err => {
+              mount.innerHTML = `<p>Error loading order: ${err.message || err}</p>`;
+            });
+
+          // Clean up any old client-side snapshots
+          sessionStorage.removeItem('last_order');
+          sessionStorage.removeItem('last_totals');
+        })();
     </script>
     <button id="theme-toggle">🌙</button>
   </body>
