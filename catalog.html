@@ -71,6 +71,12 @@
           <option value="price-asc">Price: Low to High</option>
           <option value="price-desc">Price: High to Low</option>
         </select>
+        <select id="category" class="select" onchange="renderCatalog()">
+          <option value="all">Any Category</option>
+          <option>Medical</option>
+          <option>Industrial</option>
+          <option>Chemo Rated</option>
+        </select>
       </div>
       <div id="catalog-grid" class="grid"></div>
     </section>

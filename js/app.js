@@ -113,12 +113,14 @@ function renderCatalog() {
   const q        = (getQuery('#search')?.value || '').toLowerCase();
   const material = getQuery('#material')?.value || 'all';
   const size     = getQuery('#size')?.value || 'all';
+  const category = getQuery('#category')?.value || 'all';
   const sort     = getQuery('#sort')?.value || 'pop';
 
   let list = PRODUCTS.filter(p => {
     const matchesQ    = p.name.toLowerCase().includes(q);
     const matchesMat  = material === 'all' || p.material === material;
     const matchesSize = size === 'all' || p.size.includes(size);
+    const matchesCategory = category === 'all' || p.category === category;
     return matchesQ && matchesMat && matchesSize;
   });
 
