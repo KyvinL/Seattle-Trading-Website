@@ -10,7 +10,8 @@ const PRODUCTS = [
     name: "Qube Nitrile Examination Gloves (Case - 10 Boxes)",  
     price: 54.99, 
     bestseller: true,  size: ["S","M","L","XL"], 
-    material: "Nitrile", 
+    material: "Nitrile",
+    category: "Medical", 
     powderFree: true,  
     image: "assets/nitrile-blue.jpg" },
 
@@ -19,6 +20,7 @@ const PRODUCTS = [
     price: 14.49, 
     bestseller: true,  size: ["M","L","XL"], 
     material: "Nitrile", 
+    category: "Medical",
     powderFree: true,  
     image: "assets/nitrile-black.jpg" },
 
@@ -27,6 +29,7 @@ const PRODUCTS = [
     price: 10.99, 
     bestseller: false, size: ["S","M","L"], 
     material: "Latex",  
+    category: "Medical",
     powderFree: true,  
     image: "assets/latex.jpg" },
 
@@ -35,6 +38,7 @@ const PRODUCTS = [
     price: 8.49,  
     bestseller: false, size: ["M","L"],    
     material: "Vinyl",  
+    category: "Industrial",
     powderFree: true,  
     image: "assets/vinyl.jpg" }
 ];
