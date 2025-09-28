@@ -125,7 +125,7 @@ function renderCatalog() {
     const matchesMat  = material === 'all' || p.material === material;
     const matchesSize = size === 'all' || p.size.includes(size);
     const matchesCategory = category === 'all' || p.category === category;
-    return matchesQ && matchesMat && matchesSize;
+    return matchesQ && matchesMat && matchesSize && matchesCategory;
   });
 
   if (sort === 'price-asc')  
