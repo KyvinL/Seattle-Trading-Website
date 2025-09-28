@@ -6,41 +6,379 @@ const API_BASE = 'https://api.seattletrading.org';
 
 // PRODUCT DATA -------------------------------------------------
 const PRODUCTS = [
-  { id: "qube-nitrile-exam-10bx",  
+  {
+    id: "us-1000-length-12\"-milky-white",
+    name: "Ultra Stretch 1,000 Pcs/Case Nitrile Exam Gloves LENGTH 12\" (Milky White)",
+    price: 149.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: ["Chemo Rated", "Medical"],
+    powderFree: false,
+    image: ""
+  },
+
+  {
+    id: "us-2000-pro-3.5-ice-blue",
+    name: "Ultra Stretch 2,000 Pcs/Case Nitrile Exam Gloves Pro 3.5 (Ice Blue)",
+    price: 144.99,
+    bestseller: true,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: false,
+    image: ""
+  },
+
+  {
+    id: "us-1000-length-12\"-hot-pink",
+    name: "Ultra Stretch 1,000 Pcs/Case Nitrile Exam Gloves Length 12\" (Hot Pink)",
+    price: 149.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: ["Chemo Rated", "Medical"],
+    powderFree: false,
+    image: ""
+  },
+
+  {
+    id: "us-1000-pro-3.5-hot-pink",
+    name: "Ultra Stretch 1,000 Pcs/Case Nitrile Exam Gloves Pro 3.5 (Hot Pink)",
+    price: 124.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: false,
+    image: ""
+  },
+
+  {
+    id: "us-2,000-pro-3.0-cobalt-blue",
+    name: "Ultra Stretch 2,000 Pcs/Case Nitrile Exam Gloves Pro 3.0 (Cobalt Blue)",
+    price: 144.99,
+    bestseller: true,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: false,
+    image: ""
+  },
+
+  {
+    id: "us-1,000-pro-6.0-coal-black",
+    name: "Ultra Stretch 1,000 Pcs/Case Nitrile Exam Gloves Pro 6.0 (Coal Black)",
+    price: 164.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Industrial",
+    powderFree: false,
+    image: ""
+  },
+
+  {
+    id: "us-1000-pro-5.0-coal-black",
+    name: "Ultra Stretch 1,000 Pcs/Case Nitrile Exam Gloves Pro 5.0 (Coal Black)",
+    price: 159.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: false,
+    image: ""
+  },
+
+  {
+    id: "us-1000-pro-3.5-coal-black",
+    name: "Ultra Stretch 1,000 Pcs/Case Nitrile Exam Gloves Pro 3.5 (Coal Black)",
+    price: 124.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: false,
+    image: ""
+  },
+
+  {
+    id: "us-1000-3.5-s",
+    name: "Ultra Stretch 1,000 Pcs/Case Nitrile Exam Gloves 3.5 Series",
+    price: 149.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: false,
+    image: ""
+  },
+
+  {
+    id: "qube-latex-exam-powder",
+    name: "Qube Latex Examination Powdered Gloves",
+    price: 54.99,
+    bestseller: false,
+    size: ["S","M","L"],
+    category: "Medical",
+    powderFree: false,
+    image: ""
+  },
+
+  {
+    id: "qube-nitrile-exam-powder-free",
+    name: "Qube Nitrile Examination Powder Free Gloves",
+    price: 54.99,
+    bestseller: true,
+    size: ["S","M","L"],
+    category: "Medical",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "qube-latex-exam-powder-free",
+    name: "Qube Latex Examination Powder Free Gloves",
+    price: 54.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "polysilk-18000-s",
+    name: "Polysilk 18000 Series",
+    price: 54.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "action-16000-s",
+    name: "ACTION 16000 Series",
+    price: 64.99,
+    bestseller: false,
+    size: ["S","M","L","XL"],
+    category: "Medical",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "action-69000-s",
+    name: "ACTION 69000 Series",
+    price: 64.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Industrial",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "action-83000-s",
+    name: "ACTION 83000 Series",
+    price: 57.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Industrial",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "action-808120-s",
+    name: "Action 808120 Series",
+    price: 64.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Industrial",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "action-17700-s",
+    name: "ACTION 17700 Series",
+    price: 57.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "shamrock-14000-s",
+    name: "Shamrock 14000 Series",
+    price: 54.99,
+    bestseller: false,
+    size: ["S","M","L"],
+    category: "Medical",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "shamrock-15000-s",
+    name: "Shamrock 15000 Series",
+    price: 54.99,
+    bestseller: false,
+    size: ["S","M","L"],
+    category: "Medical",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "shamrock-6000-s",
+    name: "Shamrock 60000 Series",
+    price: 54.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Industrial",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "shamrock-sup-60500-s",
+    name: "Shamrock Supreme 60500 Series",
+    price: 54.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Industrial",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "shamrock-30000-s",
+    name: "Shamrock 30000 Series",
+    price: 54.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "shamrock-80000-s",
+    name: "Shamrock 80000 Series",
+    price: 54.99,
+    bestseller: false,
+    size: ["S","M","L","XL"],
+    category: "Industrial",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "shamrock-sup-50359-s",
+    name: "Shamrock Supreme 50359 Series",
+    price: 54.99,
+    bestseller: false,
+    size: ["M"],
+    category: "Medical",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "shamrock-10000-s",
+    name: "Shamrock 10000 Series",
+    price: 54.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "shamrock-68000-s",
+    name: "Shamrock 68000 Series",
+    price: 54.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Industrial",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "shamrock-86000-s",
+    name: "Shamrock 86000 Series Latex Unlined Canners Gloves",
+    price: 124.99,
+    bestseller: false,
+    size: ["S","M","L","XL"],
+    category: "Industrial",
+    powderFree: true,
+    image: ""
+  },
+
+  {
+    id: "shamrock-20000-s",
+    name: "Shamrock 20000 Series",
+    price: 54.99,
+    bestseller: false,
+    size: ["S","M","L","XL"],
+    category: "Medical",
+    powderFree: false,
+    image: ""
+  },
+
+  {
+    id: "excel-nitrile-exam",
+    name: "Excel Nitrile Examination Gloves (Per Case)",
+    price: 64.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: false,
+    image: ""
+  },
+
+  {
+    id: "walletz-nitrile-exam",
+    name: "Walletz Nitrile Examination Gloves (Per Case)",
+    price: 64.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: false,
+    image: ""
+  },
+
+  {
+    id: "icon-nitrile-exam",
+    name: "Icon Nitrile Examination Gloves (Per Case)",
+    price: 54.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: false,
+    image: ""
+  },
+
+  {
+    id: "qube-nitrile-exam",
+    name: "Qube Nitrile Examination Gloves (Per Case)",
+    price: 54.99,
+    bestseller: false,
+    size: ["XS","S","M","L","XL"],
+    category: "Medical",
+    powderFree: false,
+    image: ""
+  },
+
+  { 
+    id: "qube-nitrile-exam-10bx",  
     name: "Qube Nitrile Examination Gloves (Case - 10 Boxes)",  
     price: 54.99, 
-    bestseller: true,  size: ["S","M","L","XL"], 
-    material: "Nitrile",
+    bestseller: true,  
+    size: ["S","M","L","XL"], 
     category: "Medical", 
     powderFree: true,  
-    image: "assets/nitrile-blue.jpg" },
-
-  { id: "st-nitrile-black-100", 
-    name: "Nitrile Industrial Gloves — Black (Box of 100)", 
-    price: 14.49, 
-    bestseller: true,  size: ["M","L","XL"], 
-    material: "Nitrile", 
-    category: "Medical",
-    powderFree: true,  
-    image: "assets/nitrile-black.jpg" },
-
-  { id: "st-latex-100",         
-    name: "Latex Examination Gloves (Box of 100)",    
-    price: 10.99, 
-    bestseller: false, size: ["S","M","L"], 
-    material: "Latex",  
-    category: "Medical",
-    powderFree: true,  
-    image: "assets/latex.jpg" },
-
-  { id: "st-vinyl-100",         
-    name: "Vinyl Gloves — Clear (Box of 100)",         
-    price: 8.49,  
-    bestseller: false, size: ["M","L"],    
-    material: "Vinyl",  
-    category: "Industrial",
-    powderFree: true,  
-    image: "assets/vinyl.jpg" }
+    image: "assets/nitrile-blue.jpg" 
+  },
 ];
 
 // UTILITIES ----------------------------------------------------
@@ -115,17 +453,19 @@ function renderCatalog() {
   if (!mount) return;
 
   const q        = (getQuery('#search')?.value || '').toLowerCase();
-  const material = getQuery('#material')?.value || 'all';
+  // const material = getQuery('#material')?.value || 'all';
   const size     = getQuery('#size')?.value || 'all';
   const category = getQuery('#category')?.value || 'all';
   const sort     = getQuery('#sort')?.value || 'pop';
+  const brand    = getQuery('#brand')?.value || 'pop';
 
   let list = PRODUCTS.filter(p => {
     const matchesQ    = p.name.toLowerCase().includes(q);
-    const matchesMat  = material === 'all' || p.material === material;
+    // const matchesMat  = material === 'all' || p.material === material;
     const matchesSize = size === 'all' || p.size.includes(size);
     const matchesCategory = category === 'all' || p.category === category;
-    return matchesQ && matchesMat && matchesSize && matchesCategory;
+    const matchesBrand = brand === 'all' || p.brand === brand;
+    return matchesQ && matchesMat && matchesSize && matchesCategory && matchesBrand;
   });
 
   if (sort === 'price-asc')  

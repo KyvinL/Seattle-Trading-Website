@@ -53,14 +53,15 @@
       <!-- Catalog filters: search, material, size, sorting -->
 <div class="filters">
         <input id="search" class="search" placeholder="Search products..." oninput="renderCatalog()" />
-        <select id="material" class="select" onchange="renderCatalog()">
+        <!-- <select id="material" class="select" onchange="renderCatalog()">
           <option value="all">All materials</option>
           <option>Nitrile</option>
           <option>Latex</option>
           <option>Vinyl</option>
-        </select>
+        </select> -->
         <select id="size" class="select" onchange="renderCatalog()">
           <option value="all">Any size</option>
+          <option>XS</option>
           <option>S</option>
           <option>M</option>
           <option>L</option>
@@ -76,6 +77,17 @@
           <option>Medical</option>
           <option>Industrial</option>
           <option>Chemo Rated</option>
+        </select>
+        <select id="brand" class="select" onchange="renderCatalog()">
+          <option value="all">Any Brand</option>
+          <option>Polysilk</option>
+          <option>Action</option>
+          <option>Shamrock</option>
+          <option>Qube</option>
+          <option>Ultra Stretch</option>
+          <option>Excel</option>
+          <option>Walletz</option>
+          <option>Icon</option>
         </select>
       </div>
       <div id="catalog-grid" class="grid"></div>
