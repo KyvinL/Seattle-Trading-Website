@@ -452,27 +452,42 @@ function renderCatalog() {
   const mount = getQuery('#catalog-grid');
   if (!mount) return;
 
-  const q        = (getQuery('#search')?.value || '').toLowerCase();
-  // const material = getQuery('#material')?.value || 'all';
-  const size     = getQuery('#size')?.value || 'all';
-  const category = getQuery('#category')?.value || 'all';
-  const sort     = getQuery('#sort')?.value || 'pop';
-  const brand    = getQuery('#brand')?.value || 'pop';
+  const qRaw      = (getQuery('#search')?.value || '').trim();
+  const q         = qRaw.toLowerCase();
+  // material select is currently removed in your HTML, so treat it as 'all'
+  const material  = (getQuery('#material')?.value || 'all').toLowerCase();
+  const size      = (getQuery('#size')?.value || 'all').toLowerCase();
+  const category  = (getQuery('#category')?.value || 'all').toLowerCase();
+  const brand     = (getQuery('#brand')?.value || 'all').toLowerCase();
+  const sort      = getQuery('#sort')?.value || 'pop';
 
   let list = PRODUCTS.filter(p => {
-    const matchesQ    = p.name.toLowerCase().includes(q);
-    // const matchesMat  = material === 'all' || p.material === material;
-    const matchesSize = size === 'all' || p.size.includes(size);
-    const matchesCategory = category === 'all' || p.category === category;
-    const matchesBrand = brand === 'all' || p.brand === brand;
+    const name = (p.name || '').toLowerCase();
+
+    // product material/size/category/brand normalized
+    const pMaterial = (p.material || '').toString().toLowerCase();
+    const pSizes = Array.isArray(p.size) ? p.size.map(s => String(s).toLowerCase()) : [];
+    // category can be a string or an array in your data — handle both
+    const pCategoryRaw = p.category || [];
+    const pCategories = Array.isArray(pCategoryRaw)
+      ? pCategoryRaw.map(c => String(c).toLowerCase())
+      : [String(pCategoryRaw).toLowerCase()];
+    const pBrand = (p.brand || '').toString().toLowerCase();
+
+    const matchesQ        = q === '' || name.includes(q);
+    const matchesMat      = material === 'all' || pMaterial === material;
+    const matchesSize     = size === 'all' || pSizes.includes(size);
+    const matchesCategory = category === 'all' || pCategories.includes(category);
+    const matchesBrand    = brand === 'all' || pBrand === brand;
+
     return matchesQ && matchesMat && matchesSize && matchesCategory && matchesBrand;
   });
 
   if (sort === 'price-asc')  
     list.sort((a,b) => a.price - b.price);
-  if (sort === 'price-desc') 
+  else if (sort === 'price-desc') 
     list.sort((a,b) => b.price - a.price);
-  if (sort === 'pop')        
+  else // pop
     list.sort((a,b) => (b.bestseller|0) - (a.bestseller|0));
 
   mount.innerHTML = list.map(p => productCardHTML(p)).join('');
