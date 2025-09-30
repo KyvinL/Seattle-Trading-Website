@@ -446,15 +446,13 @@ function compactCart() {
 const ORIGIN = window.location.origin;              // e.g., http://127.0.0.1:5500
 const THANK_YOU_URL = `${ORIGIN}/thank-you.html`;   // central place to change later
 
-
-// CATALOG (filters + render) ----------------------------------
 function renderCatalog() {
   const mount = getQuery('#catalog-grid');
   if (!mount) return;
 
   const qRaw      = (getQuery('#search')?.value || '').trim();
   const q         = qRaw.toLowerCase();
-  // material select is currently removed in your HTML, so treat it as 'all'
+  // material select is currently not present in your HTML; treat as 'all'
   const material  = (getQuery('#material')?.value || 'all').toLowerCase();
   const size      = (getQuery('#size')?.value || 'all').toLowerCase();
   const category  = (getQuery('#category')?.value || 'all').toLowerCase();
@@ -467,11 +465,11 @@ function renderCatalog() {
     // product material/size/category/brand normalized
     const pMaterial = (p.material || '').toString().toLowerCase();
     const pSizes = Array.isArray(p.size) ? p.size.map(s => String(s).toLowerCase()) : [];
-    // category can be a string or an array in your data — handle both
-    const pCategoryRaw = p.category || [];
-    const pCategories = Array.isArray(pCategoryRaw)
-      ? pCategoryRaw.map(c => String(c).toLowerCase())
-      : [String(pCategoryRaw).toLowerCase()];
+    // category can be a string or an array — normalize to array of lowercase strings
+    const rawCategory = p.category ?? [];
+    const pCategories = Array.isArray(rawCategory)
+      ? rawCategory.map(c => String(c || '').toLowerCase())
+      : [String(rawCategory || '').toLowerCase()];
     const pBrand = (p.brand || '').toString().toLowerCase();
 
     const matchesQ        = q === '' || name.includes(q);
@@ -487,7 +485,7 @@ function renderCatalog() {
     list.sort((a,b) => a.price - b.price);
   else if (sort === 'price-desc') 
     list.sort((a,b) => b.price - a.price);
-  else // pop
+  else // 'pop'
     list.sort((a,b) => (b.bestseller|0) - (a.bestseller|0));
 
   mount.innerHTML = list.map(p => productCardHTML(p)).join('');
