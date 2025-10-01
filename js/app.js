@@ -2,7 +2,7 @@
 // Seattle Trading — app.js
 // =============================================================
 
-const API_BASE = 'https://api.seattletrading.org';
+const API_BASE = '/api';
 
 // PRODUCT DATA -------------------------------------------------
 const PRODUCTS = [
