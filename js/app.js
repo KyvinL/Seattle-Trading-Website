@@ -2,7 +2,7 @@
 // Seattle Trading — app.js
 // =============================================================
 
-const API_BASE = '/api';
+const API_BASE = 'https://api.seattletrading.org';
 
 // PRODUCT DATA -------------------------------------------------
 const PRODUCTS = [
@@ -864,7 +864,7 @@ function wireCheckoutTax() {
 
   let elements = null, paymentElement = null, stripe = null;
 
-  const STRIPE_PK = 'pk_live_51S4pf1LgEVwSKcyquElJZsQhxsLt9VBlZe6KOvuQnpCeGKYxYPYzukIcyybJlBTTKpEUXcZIHw8maMr0MvcON1vO00DMH1MPOc';
+  const STRIPE_PK = 'pk_test_51S4pfCPtRDwYgoxeTaTjZHk2bORnbHwkB1iYWW2t0a7SseAUHTQb3yaQ8wroQGtsyaDRThQ8ChGuCdYcNhP5UmZz00qUy42VQt';
 
   function currentShipping() {
     return {
