@@ -388,29 +388,6 @@ function formatUSD(n) {
 const getQuery = (sel, root=document) => root.querySelector(sel);
 const getAll   = (sel, root=document) => Array.from(root.querySelectorAll(sel));
 
-
-function safeParseJSON(str, fallback) {
-
-  try { return JSON.parse(str); } catch { return fallback; }
-
-}
-
-
-
-function debounce(fn, wait=300) {
-
-  let t;
-
-  return (...args) => {
-
-    clearTimeout(t);
-
-    t = setTimeout(() => fn.apply(null, args), wait);
-
-  };
-
-}
-
 // HOMEPAGE: Bestsellers ---------------------------------------
 function renderBestsellers() {
   const mount = getQuery('#bestsellers');
@@ -439,12 +416,12 @@ function productCardHTML(p) {
 
 // CART (localStorage) -----------------------------------------
 const CART_KEY = "seattle_trading_cart_v1";
-const getCart  = () => safeParseJSON(localStorage.getItem(CART_KEY) || '[]', []);
+const getCart  = () => JSON.parse(localStorage.getItem(CART_KEY) || '[]');
 const saveCart = (items) => localStorage.setItem(CART_KEY, JSON.stringify(items));
 
 function addToCart(id) {
   const item = PRODUCTS.find(p => p.id === id);
-  if (!item) return alert('Product not found.');
+  if (!item) return;
   const cart = getCart();
   const existing = cart.find(c => c.id === id);
   if (existing) existing.qty += 1; else cart.push({ id, qty: 1 });
@@ -453,26 +430,15 @@ function addToCart(id) {
   updateFooterMeta();
 }
 
-function escapeHtml(str) {
-  if (!str) return '';
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
 // --- Helpers for dynamic thank-you ---
 // --- Helpers for dynamic thank-you (ADD ONCE) ---
 function compactCart() {
-
   try {
-    const raw = getCart();
+    const raw = JSON.parse(localStorage.getItem("seattle_trading_cart_v1") || "[]");
     return raw.map(i => {
       const p = PRODUCTS.find(x => x.id === i.id);
-      const price_c = p && typeof p.price === 'number' ? Math.round(p.price * 100) : 0;
-      return { id: i.id, qty: Math.max(1, Number(i.qty || 1)), p: price_c };
+      const price_cents = Math.round(((p?.price ?? 0) * 100));
+      return { id: i.id, qty: i.qty || 1, p: price_cents };
     });
   } catch { return []; }
 }
@@ -480,13 +446,13 @@ function compactCart() {
 const ORIGIN = window.location.origin;              // e.g., http://127.0.0.1:5500
 const THANK_YOU_URL = `${ORIGIN}/thank-you.html`;   // central place to change later
 
-// CATALOG RENDERING ------------------------------------------
 function renderCatalog() {
   const mount = getQuery('#catalog-grid');
   if (!mount) return;
 
   const qRaw      = (getQuery('#search')?.value || '').trim();
   const q         = qRaw.toLowerCase();
+  // material select is currently not present in your HTML; treat as 'all'
   const material  = (getQuery('#material')?.value || 'all').toLowerCase();
   const size      = (getQuery('#size')?.value || 'all').toLowerCase();
   const category  = (getQuery('#category')?.value || 'all').toLowerCase();
@@ -510,7 +476,7 @@ function renderCatalog() {
     const matchesMat      = material === 'all' || pMaterial === material;
     const matchesSize     = size === 'all' || pSizes.includes(size);
     const matchesCategory = category === 'all' || pCategories.includes(category);
-    const matchesBrand    = brand === 'all' || pBrand.includes(brand);
+    const matchesBrand    = brand === 'all' || pBrand === brand;
 
     return matchesQ && matchesMat && matchesSize && matchesCategory && matchesBrand;
   });
@@ -529,14 +495,14 @@ function renderCatalog() {
 function cartItemRowHTML(item, product) {
   const subtotal = product.price * (item.qty || 1);
   return `
-    <div class="cart-row" data-id="${product.id}">
+    <div class="cart-row" data-id="${item.id}">
       <div class="cart-prod">
-        <img src="${product.image || 'assets/placeholder.jpg'}" alt="${escapeHtml(product.name)}">
-        <span>${escapeHtml(product.name)}</span>
+        <img src="${product.image || 'assets/placeholder.jpg'}" alt="${product.name}">
+        <span>${product.name}</span>
       </div>
       <div class="cart-price">${formatUSD(product.price)}</div>
       <div class="cart-qty">
-        <input type="number" class="qty-input" min="1" value="${item.qty || 1}" aria-label="Quantity for ${escapeHtml(product.name)}">
+        <input type="number" class="qty-input" min="1" value="${item.qty || 1}" aria-label="Quantity for ${product.name}">
       </div>
       <div class="cart-sub">${formatUSD(subtotal)}</div>
       <div class="cart-remove">
@@ -766,7 +732,7 @@ function wireAccountPage() {
   if (!orders.length) {
     ordersEl.innerHTML = `<p class="muted">No orders yet.</p>`;
   } else {
-    const rows = orders.map(o => {
+  const rows = orders.map(o => {
     // pick amount in CENTS: total_c → subtotal_c → (subtotal dollars → cents)
     let cents = Number.isFinite(o.total_c) ? o.total_c
              : (Number.isFinite(o.subtotal_c) ? o.subtotal_c
@@ -774,7 +740,9 @@ function wireAccountPage() {
 
     if (!Number.isFinite(cents) || cents < 0) cents = 0;
 
-    const amountHTML = formatUSD(cents / 100)
+    const amountHTML = (typeof formatUSD === 'function')
+      ? formatUSD(cents / 100)
+      : '$' + (cents / 100).toFixed(2);
 
     return `
       <tr>
@@ -784,29 +752,26 @@ function wireAccountPage() {
         <td style="padding:8px; text-align:right;">${amountHTML}</td>
         <td style="padding:8px;">${o.status || 'paid'}</td>
       </tr>
+    `;
+  }).join('');
 
-      `;
-
-    }).join('');
-
-    ordersEl.innerHTML = `
-
-      <div class="card" style="overflow:auto;">
-        <table style="width:100%; border-collapse:separate; border-spacing:0 6px;">
-          <thead>
-            <tr class="muted">
-              <th style="text-align:left; padding:8px;">Order</th>
-              <th style="text-align:left; padding:8px;">Date</th>
-              <th style="text-align:right; padding:8px;">Items</th>
-              <th style="text-align:right; padding:8px;">Total</th>
-              <th style="text-align:left; padding:8px;">Status</th>
-            </tr>
-          </thead>
-          <tbody>${rows}</tbody>
-        </table>
-      </div>
-      `;
-  }
+  ordersEl.innerHTML = `
+    <div class="card" style="overflow:auto;">
+      <table style="width:100%; border-collapse:separate; border-spacing:0 6px;">
+        <thead>
+          <tr class="muted">
+            <th style="text-align:left; padding:8px;">Order</th>
+            <th style="text-align:left; padding:8px;">Date</th>
+            <th style="text-align:right; padding:8px;">Items</th>
+            <th style="text-align:right; padding:8px;">Total</th>
+            <th style="text-align:left; padding:8px;">Status</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+  `;
+}
 }
 
 // BOOT
@@ -851,7 +816,7 @@ function computeCartTotals() {
   return { items, subtotal };
 }
 
-// Checkout/tax/payment wiring
+
 function wireCheckoutTax() {
   const page = document.getElementById('checkout-page');
   if (!page) return;
@@ -873,10 +838,6 @@ function wireCheckoutTax() {
 
   let latestCalcId = null;
 
-  let elements = null, paymentElement = null, stripe = null;
-
-  const STRIPE_PK = 'pk_test_51S4pfCPtRDwYgoxeTaTjZHk2bORnbHwkB1iYWW2t0a7SseAUHTQb3yaQ8wroQGtsyaDRThQ8ChGuCdYcNhP5UmZz00qUy42VQt';
-
   function currentShipping() {
     return {
       name: (nameEl?.value || '').trim(),
@@ -892,173 +853,181 @@ function wireCheckoutTax() {
 
   // Paint optimistic client totals while we fetch server values
   function optimisticPaint() {
-    const { items, subtotal } = computeCartTotals();
-    if (itemsEl) itemsEl.textContent = items;
-    if (subEl)   subEl.textContent   = formatUSD(subtotal);
-    if (taxEl)   taxEl.textContent   = '$0.00';
-    if (totEl)   totEl.textContent = formatUSD(subtotal);
+  const { items, subtotal } = computeCartTotals();
+  if (itemsEl) itemsEl.textContent = items;
+  if (subEl)   subEl.textContent   = formatUSD(subtotal);
+  if (taxEl)   taxEl.textContent   = '$0.00';
+  if (totEl)   totEl.textContent   = formatUSD(subtotal);
+}
+
+  // Call backend to get authoritative tax for the address
+   async function recalc() {
+  const items = getCart().map(ci => ({ id: ci.id, qty: ci.qty || 1 }));
+  if (!items.length) {
+    optimisticPaint();
+    if (payBtn) payBtn.disabled = true;
+    return;
+  }
+  const shipping = currentShipping();
+
+  try {
+    if (payBtn) payBtn.disabled = true;
+    if (msgEl)  msgEl.textContent = 'Calculating tax…';
+
+    // Ask server for a tax preview
+    // Require a complete address before hitting the server
+const s = currentShipping();
+const addr = s.address || {};
+if (!addr.line1 || !addr.city || !addr.state || !addr.postal_code || !addr.country) {
+  optimisticPaint();
+  if (msgEl) msgEl.textContent = 'Enter full shipping address to calculate tax.';
+  if (payBtn) payBtn.disabled = true;
+  return;
+}
+
+const resp = await fetch(`${API_BASE}/tax-preview`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    items: getCart().map(ci => ({ id: ci.id, qty: ci.qty || 1 })),
+    shipping: currentShipping()
+  })
+});
+
+const data = await resp.json();
+if (!resp.ok) throw new Error(data.error || 'Tax preview failed');
+
+latestCalcId = data.id;                 
+const { items: itemsCount } = computeCartTotals();
+if (itemsEl) itemsEl.textContent = itemsCount;
+
+const serverSubtotalC = Number(data.subtotal || 0);
+const serverTaxC      = Number(data.tax || 0);
+
+// If the server somehow sent subtotal=0 for a non-empty cart, reconstruct from total-tax
+let displaySubtotalC = serverSubtotalC;
+if (itemsCount > 0 && serverSubtotalC === 0) {
+  displaySubtotalC = Math.max(0, (Number(data.total || 0) - serverTaxC));
+}
+
+// Paint (cents → dollars)
+if (subEl) subEl.textContent = formatUSD(displaySubtotalC / 100);
+if (taxEl) taxEl.textContent = formatUSD(serverTaxC / 100);
+if (totEl) totEl.textContent = formatUSD((displaySubtotalC + serverTaxC) / 100);
+
+// Save computed total instead of serverTotalC
+const computedTotalC = displaySubtotalC + serverTaxC;
+sessionStorage.setItem('last_totals', JSON.stringify({
+  subtotal_c: displaySubtotalC,
+  tax_c:      serverTaxC,
+  total_c:    computedTotalC,
+  currency:   'usd'
+}));
+
+if (msgEl) msgEl.textContent = '';
+if (payBtn) payBtn.disabled = false;
+  } catch (e) {
+    optimisticPaint();
+    if (msgEl) msgEl.textContent = e.message || 'Could not calculate tax.';
+    if (payBtn) payBtn.disabled = true;
+  }
+}
+
+// Stripe (client) payment shit
+let stripe, elements, paymentElement;
+const STRIPE_PK = 'pk_test_51S4pfCPtRDwYgoxeTaTjZHk2bORnbHwkB1iYWW2t0a7SseAUHTQb3yaQ8wroQGtsyaDRThQ8ChGuCdYcNhP5UmZz00qUy42VQt'; // pk_test key
+
+async function startPayment(e) {
+  e?.preventDefault?.();
+
+  if (!latestCalcId) {
+    if (msgEl) msgEl.textContent = 'Please enter your address so we can calculate tax.';
+    return;
   }
 
-  async function recalc() {
-    const items = getCart().map(ci => ({ id: ci.id, qty: ci.qty || 1 }));
+  const shipping = currentShipping();
+  try {
+    payBtn.disabled = true;
+    if (msgEl) msgEl.textContent = 'Initializing payment…';
 
-    if (!items.length) {
-      optimisticPaint();
-      if (payBtn) payBtn.disabled = true;
-      if (msgEl) msgEl.textContent = 'Cart empty.';
+    // 👇 Include calc_id + shipping + customer fields + compact cart
+    const user = (typeof getUser === 'function') ? getUser() : null;
+
+const resp = await fetch(`${API_BASE}/create-payment-intent`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    calc_id: latestCalcId,
+    shipping,                                  // your current shipping object
+    email: user?.email || '',                  // fallback to logged-in user
+    name:  shipping?.name || user?.name || '', // shipping name or user name
+    cart:  compactCart()                       // compact line items for metadata
+  })
+});
+
+    const data = await resp.json();
+    if (!resp.ok || !data.clientSecret) throw new Error(data.error || 'Init failed');
+
+    if (!stripe) stripe = Stripe(STRIPE_PK);
+    if (!elements) {
+      elements = stripe.elements({ clientSecret: data.clientSecret });
+      paymentElement = elements.create('payment');
+      paymentElement.mount('#payment-element');
+    } else {
+      elements.update({ clientSecret: data.clientSecret });
+    }
+
+    // keep your local “what I tried to buy” snapshot (optional)
+    sessionStorage.setItem("last_order", JSON.stringify(getCart()));
+
+    // ✅ Confirm payment with smart redirect handling
+    const result = await stripe.confirmPayment({
+      elements,
+      confirmParams: { return_url: THANK_YOU_URL },
+      redirect: 'if_required'
+      // redirect: THANK_YOU_URL   // cards won't leave the page; wallets/redirect methods will
+    });
+
+    if (result?.error) {
+      payBtn.disabled = false;
+      if (msgEl) msgEl.textContent = result.error.message || 'Payment failed. Please try again.';
       return;
     }
 
-    const s = currentShipping();
-    const addr = s.address || {};
-    if (!addr.line1 || !addr.city || !addr.state || !addr.postal_code || !addr.country) {
-      optimisticPaint();
-      if (msgEl) msgEl.textContent = 'Enter full shipping address to calculate tax.';
-      if (payBtn) payBtn.disabled = true;
+    const pi = result?.paymentIntent;
+    if (pi && (pi.status === 'succeeded' || pi.status === 'processing')) {
+      // show dynamic order summary on thank-you page
+      window.location.href = `${THANK_YOU_URL}?pi=${encodeURIComponent(pi.id)}`;
       return;
     }
 
-    try {
-      if (payBtn) payBtn.disabled = true;
-      if (msgEl) msgEl.textContent = 'Calculating tax…';
-
-      const resp = await fetch(`${API_BASE}/tax-preview`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items, shipping: s })
-      });
-
-      const data = await resp.json();
-      if (!resp.ok) throw new Error(data.error || 'Tax preview failed');
-
-      latestCalcId = data.id;
-      const itemsCount = computeCartTotals().items;
-
-      const serverSubtotalC = Number(data.subtotal || 0);
-      const serverTaxC      = Number(data.tax || 0);
-
-      let displaySubtotalC = serverSubtotalC;
-      if (itemsCount > 0 && serverSubtotalC === 0) {
-        displaySubtotalC = Math.max(0, (Number(data.total || 0) - serverTaxC));
-      }
-
-      if (subEl) subEl.textContent = formatUSD((displaySubtotalC || 0) / 100);
-      if (taxEl) taxEl.textContent = formatUSD((serverTaxC || 0) / 100);
-      if (totEl) totEl.textContent = formatUSD(((displaySubtotalC || 0) + (serverTaxC || 0)) / 100);
-
-      const computedTotalC = (displaySubtotalC || 0) + (serverTaxC || 0);
-      sessionStorage.setItem('last_totals', JSON.stringify({
-        subtotal_c: displaySubtotalC,
-        tax_c: serverTaxC,
-        total_c: computedTotalC,
-        currency: 'usd'
-      }));
-
-      if (msgEl) msgEl.textContent = '';
-      if (payBtn) payBtn.disabled = false;
-    } catch (e) {
-      optimisticPaint();
-      if (msgEl) msgEl.textContent = e.message || 'Could not calculate tax.';
-      if (payBtn) payBtn.disabled = true;
-    }
+    // If we got here, it likely requires_action (handled by automatic redirect) or is unexpected
+    if (msgEl) msgEl.textContent = 'Additional authentication required or unexpected status.';
+    payBtn.disabled = false;
+  } catch (err) {
+    payBtn.disabled = false;
+    if (msgEl) msgEl.textContent = err.message || 'Error initializing payment.';
   }
-  const debouncedRecalc = debounce(recalc, 450);
+}
 
 
+payBtn?.addEventListener('click', startPayment);
 
-  // Payment (Stripe) handling
-
-  async function startPayment(e) {
-
-    e?.preventDefault?.();
-
-    if (!latestCalcId) {
-      if (msgEl) msgEl.textContent = 'Please enter your address so we can calculate tax.';
-      return;
-    }
-    const shipping = currentShipping();
-    try {
-      if (payBtn) payBtn.disabled = true;
-      if (msgEl) msgEl.textContent = 'Initializing payment…';
-      const user = getUser();
-      const resp = await fetch(`${API_BASE}/create-payment-intent`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          calc_id: latestCalcId,
-          shipping,
-          email: user?.email || '',
-          name: shipping?.name || user?.name || '',
-          cart: compactCart()
-        })
-      });
-
-
-
-      const data = await resp.json();
-      if (!resp.ok || !data.clientSecret) throw new Error(data.error || 'Init failed');
-      if (!stripe) stripe = Stripe(STRIPE_PK);
-      if (!elements) {
-        elements = stripe.elements({ clientSecret: data.clientSecret });
-        paymentElement = elements.create('payment');
-        paymentElement.mount('#payment-element');
-      } else {
-        try {
-          elements.update({ clientSecret: data.clientSecret });
-        } catch (err) {
-          console.warn('elements.update failed:', err);
-        }
-      }
-
-      sessionStorage.setItem("last_order", JSON.stringify(getCart()));
-
-      const result = await stripe.confirmPayment({
-        elements,
-        confirmParams: { return_url: THANK_YOU_URL },
-        redirect: 'if_required'
-      });
-
-      if (result?.error) {
-        if (msgEl) msgEl.textContent = result.error.message || 'Payment failed. Please try again.';
-        if (payBtn) payBtn.disabled = false;
-        return;
-      }
-
-
-
-      const pi = result?.paymentIntent;
-      if (pi && (pi.status === 'succeeded' || pi.status === 'processing')) {
-        window.location.href = `${THANK_YOU_URL}?pi=${encodeURIComponent(pi.id)}`;
-        return;
-      }
-
-      if (msgEl) msgEl.textContent = 'Additional authentication required or unexpected status.';
-      if (payBtn) payBtn.disabled = false;
-    } catch (err) {
-      if (payBtn) payBtn.disabled = false;
-      if (msgEl) msgEl.textContent = err.message || 'Error initializing payment.';
-    }
-  }
-
-
-
-  // attach click handler (safe — payBtn is in this scope)
-  payBtn?.addEventListener('click', startPayment);
-
-  // Recompute when user edits address (debounced)
+  // Recompute when user edits address
   ['change','keyup','blur'].forEach(evt => {
-    nameEl?.addEventListener(evt, debouncedRecalc);
-    addrEl?.addEventListener(evt, debouncedRecalc);
-    cityEl?.addEventListener(evt, debouncedRecalc);
-    stateEl?.addEventListener(evt, debouncedRecalc);
-    zipEl?.addEventListener(evt, debouncedRecalc);
-    countryEl?.addEventListener(evt, debouncedRecalc);
+    nameEl?.addEventListener(evt, recalc);
+    addrEl?.addEventListener(evt, recalc);
+    cityEl?.addEventListener(evt, recalc);
+    stateEl?.addEventListener(evt, recalc);
+    zipEl?.addEventListener(evt, recalc);
+    countryEl?.addEventListener(evt, recalc);
   });
 
+  // Initial
   optimisticPaint();
-  debouncedRecalc();
+  recalc();
 
-  // Expose getter
+  // Getterso payment step can use the latest calc_id
   window.getLatestTaxCalcId = () => latestCalcId;
 }
 
