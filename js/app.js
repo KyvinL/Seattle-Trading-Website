@@ -453,9 +453,20 @@ function addToCart(id) {
   updateFooterMeta();
 }
 
+function escapeHtml(str) {
+  if (!str) return '';
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 // --- Helpers for dynamic thank-you ---
 // --- Helpers for dynamic thank-you (ADD ONCE) ---
 function compactCart() {
+
   try {
     const raw = getCart();
     return raw.map(i => {
