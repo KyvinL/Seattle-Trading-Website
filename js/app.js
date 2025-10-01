@@ -723,7 +723,7 @@ function wireAccountPage() {
     if (confirm('Log out?')) {
       clearUser();
       wireAccountUI();
-      window.location.href = 'home.html';
+      window.location.href = 'index.html';
     }
   };
 
