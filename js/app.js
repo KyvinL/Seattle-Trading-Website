@@ -401,9 +401,13 @@ function productCardHTML(p) {
   const imgSrc = p.image || 'assets/placeholder.jpg';
   return `
     <article class="product" data-id="${p.id}">
-      <img src="${imgSrc}" alt="${p.name}">
+      <a href="product.html?id=${encodeURIComponent(p.id)}">
+        <img src="${imgSrc}" alt="${p.name}">
+      </a>
       <div class="meta">
-        <div class="title">${p.name}</div>
+        <div class="title">
+          <a href="product.html?id=${encodeURIComponent(p.id)}">${p.name}</a>
+        </div>
         <div class="row" style="display:flex;justify-content:space-between;align-items:center;">
           <span class="price">${formatUSD(p.price)}</span>
           ${p.bestseller ? '<span class="badge">Bestseller</span>' : ''}
@@ -1030,4 +1034,33 @@ payBtn?.addEventListener('click', startPayment);
   // Getterso payment step can use the latest calc_id
   window.getLatestTaxCalcId = () => latestCalcId;
 }
+
+// Rendering Products on product.html
+function renderProductPage() {
+  const page = document.getElementById('product-page');
+  if(!page) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const product = PRODUCTS.find(p => p.id === id);
+
+  if (!product) {
+    page.innerHTML = '<p>Product Not Found</p>';
+    return;
+  }
+
+  page.innerHTML = `
+    <div class="card">
+      <img src="${product.image}" alt="${product.name}" style="width:100%;max-width:400px;display:block;margin:auto;">
+      <h1>${product.name}</h1>
+      <p><strong>Material:</strong> ${product.material}</p>
+      <p><strong>Price:</strong> ${formatUSD(product.price)}</p>
+      <button class="cta" onclick="addToCart('${product.id}')">Add to cart</button>
+    </div>
+  `;
+}
+document.addEventListener('DOMContentLoaded', () => {
+  renderProductPage();
+});
+  
 
