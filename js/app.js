@@ -14,6 +14,7 @@ const PRODUCTS = [
     size: ["XS","S","M","L","XL"],
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
+    brand: "Ultra Stretch",
     image: ""
   },
 
@@ -25,7 +26,7 @@ const PRODUCTS = [
     size: ["XS","S","M","L","XL"],
     category: "Medical",
     powderFree: false,
-    image: ""
+    image: "assets/Excel Nitril Medium 2.png"
   },
 
   {
@@ -377,7 +378,7 @@ const PRODUCTS = [
     size: ["S","M","L","XL"], 
     category: "Medical", 
     powderFree: true,  
-    image: "assets/nitrile-blue.jpg" 
+    image: "" 
   },
 ];
 
