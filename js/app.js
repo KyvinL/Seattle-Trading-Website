@@ -15,7 +15,7 @@ const PRODUCTS = [
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
     brand: "Ultra Stretch",
-    images: [
+    image: [
       "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Box.jpg",
       "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Front.jpg",
       "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Vert.jpg"
@@ -419,9 +419,6 @@ function renderBestsellers() {
 }
 
 // Card template
-//<img src="${Array.isArray(product.images) ? product.images[0] : product.image}" alt="${product.name}" loading="lazy">
-     
-     
 function productCardHTML(p) {
   const imgSrc = p.image || 'assets/placeholder.jpg';
   return `
@@ -521,6 +518,7 @@ function renderCatalog() {
 }
 
 // CART PAGE RENDERING -----------------------------------------
+//<img src="${Array.isArray(product.images) ? product.images[0] : product.image}" alt="${product.name}" loading="lazy">
 function cartItemRowHTML(item, product) {
   const subtotal = product.price * (item.qty || 1);
   return `
