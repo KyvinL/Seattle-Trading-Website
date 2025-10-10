@@ -15,7 +15,11 @@ const PRODUCTS = [
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    image: [
+      "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Box.jpg",
+      "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Front.jpg",
+      "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Vert.jpg"
+    ]
   },
 
   {
@@ -35,7 +39,7 @@ const PRODUCTS = [
     name: "Ultra Stretch 1,000 Pcs/Case Nitrile Exam Gloves Length 12\" (Hot Pink)",
     price: 149.99,
     bestseller: false,
-    size: ["XS","S","M","L","XL"],
+    size: ["S","M"],
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
     brand: "Ultra Stretch",
@@ -336,10 +340,18 @@ const PRODUCTS = [
     price: 124.99,
     bestseller: false,
     size: ["S","M","L","XL"],
+    colors: [
+      { name: "Blue", image: ""},
+      { name: "Orange", image: ""},
+      { name: "Yellow", image: ""},
+    ],
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    image: [
+      "",
+      "",
+    ]
   },
 
   {
@@ -388,30 +400,6 @@ const PRODUCTS = [
     powderFree: false,
     brand: "Icon",
     image: ""
-  },
-
-  {
-    id: "qube-nitrile-exam",
-    name: "Qube Nitrile Examination Gloves (Per Case)",
-    price: 54.99,
-    bestseller: false,
-    size: ["XS","S","M","L","XL"],
-    category: "Medical",
-    powderFree: false,
-    brand: "Qube",
-    image: ""
-  },
-
-  { 
-    id: "qube-nitrile-exam-10bx",  
-    name: "Qube Nitrile Examination Gloves (Case - 10 Boxes)",  
-    price: 54.99, 
-    bestseller: true,  
-    size: ["S","M","L","XL"], 
-    category: "Medical", 
-    powderFree: true,  
-    brand: "Qube",
-    image: "" 
   },
 ];
 
@@ -1072,27 +1060,133 @@ payBtn?.addEventListener('click', startPayment);
 // Rendering Products on product.html
 function renderProductPage() {
   const page = document.getElementById('product-page');
-  if(!page) return;
+  if (!page) return;
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   const product = PRODUCTS.find(p => p.id === id);
 
   if (!product) {
-    page.innerHTML = '<p>Product Not Found</p>';
+    page.innerHTML = '<p>Product not found.</p>';
     return;
   }
 
-  page.innerHTML = `
-    <div class="card">
-      <img src="${product.image}" alt="${product.name}" style="width:100%;max-width:400px;display:block;margin:auto;">
-      <h1>${product.name}</h1>
-      <p><strong>Material:</strong> ${product.material}</p>
-      <p><strong>Price:</strong> ${formatUSD(product.price)}</p>
-      <button class="cta" onclick="addToCart('${product.id}')">Add to cart</button>
-    </div>
-  `;
+  let currentImageIndex = 0;
+  let currentColor = product.colors ? product.colors[0].name : null;
+
+  function render() {
+    const mainImage =
+      product.images?.[currentImageIndex] ||
+      (currentColor ? product.colors.find(c => c.name === currentColor)?.image : product.image);
+
+    const colorOptions = product.colors
+      ? product.colors
+          .map(
+            (c) => `
+      <button class="color-option ${c.name === currentColor ? 'active' : ''}" data-color="${c.name}">
+        ${c.name}
+      </button>`
+          )
+          .join('')
+      : '';
+
+    const sizeOptions = product.size
+      ? product.size.map((s) => `<option value="${s}">${s}</option>`).join('')
+      : '';
+
+    page.innerHTML = `
+      <div class="product-detail">
+        <div class="image-gallery">
+          <button class="arrow prev">‹</button>
+          <img src="${mainImage}" alt="${product.name}" class="main-image" id="main-image">
+          <button class="arrow next">›</button>
+        </div>
+
+        <div class="info">
+          <h1>${product.name}</h1>
+          <p><strong>Price:</strong> ${formatUSD(product.price)}</p>
+          <p><strong>Material:</strong> ${product.material || 'N/A'}</p>
+
+          ${
+            colorOptions
+              ? `<div class="colors"><strong>Color:</strong> ${colorOptions}</div>`
+              : ''
+          }
+          ${
+            sizeOptions
+              ? `<div class="sizes"><strong>Size:</strong> 
+                <select id="size-select">${sizeOptions}</select></div>`
+              : ''
+          }
+
+          <button class="cta" id="add-to-cart">Add to cart</button>
+        </div>
+      </div>
+    `;
+
+    // Navigation arrows
+    const prev = page.querySelector('.arrow.prev');
+    const next = page.querySelector('.arrow.next');
+    prev.addEventListener('click', showPrevImage);
+    next.addEventListener('click', showNextImage);
+
+    // Color options
+    const colors = page.querySelectorAll('.color-option');
+    colors.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        currentColor = btn.dataset.color;
+        render();
+      });
+    });
+
+    // Add to cart
+    const addBtn = page.querySelector('#add-to-cart');
+    addBtn.addEventListener('click', () => addToCart(product.id));
+
+    // Swipe handling
+    const imageEl = page.querySelector('#main-image');
+    addSwipeListeners(imageEl);
+  }
+
+  function showPrevImage() {
+    if (!product.images) return;
+    currentImageIndex =
+      (currentImageIndex - 1 + product.images.length) % product.images.length;
+    render();
+  }
+
+  function showNextImage() {
+    if (!product.images) return;
+    currentImageIndex = (currentImageIndex + 1) % product.images.length;
+    render();
+  }
+
+  // 👉 Touch swipe events
+  function addSwipeListeners(el) {
+    let startX = 0;
+    let endX = 0;
+
+    el.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    el.addEventListener('touchmove', (e) => {
+      endX = e.touches[0].clientX;
+    });
+
+    el.addEventListener('touchend', () => {
+      const diff = startX - endX;
+      if (Math.abs(diff) > 50) {
+        // Swipe threshold
+        if (diff > 0) showNextImage();
+        else showPrevImage();
+      }
+    });
+  }
+
+  render();
 }
+
 document.addEventListener('DOMContentLoaded', () => {
   renderProductPage();
 });
