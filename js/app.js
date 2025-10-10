@@ -16,9 +16,9 @@ const PRODUCTS = [
     powderFree: false,
     brand: "Ultra Stretch",
     images: [
-      "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Box.jpg",
-      "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Front.jpg",
-      "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Vert.jpg"
+      "assets/UltraStretch/MilkyWhite/Length12/Box.jpg",
+      "assets/UltraStretch/MilkyWhite/Length12/Front.jpg",
+      "assets/UltraStretch/MilkyWhite/Length12/Vert.jpg"
     ]
   },
 
