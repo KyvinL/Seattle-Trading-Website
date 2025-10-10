@@ -31,7 +31,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: "assets/Excel Nitril Medium 2.png"
+    images: "assets/Excel Nitril Medium 2.png"
   },
 
   {
@@ -43,7 +43,7 @@ const PRODUCTS = [
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    images: ""
   },
 
   {
@@ -55,7 +55,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    images: ""
   },
 
   {
@@ -67,7 +67,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    images: ""
   },
 
   {
@@ -79,7 +79,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    images: ""
   },
 
   {
@@ -91,7 +91,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    images: ""
   },
 
   {
@@ -103,7 +103,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    images: ""
   },
 
   {
@@ -115,7 +115,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    images: ""
   },
 
   {
@@ -127,7 +127,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Qube",
-    image: ""
+    images: ""
   },
 
   {
@@ -139,7 +139,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand:"Qube",
-    image: ""
+    images: ""
   },
 
   {
@@ -151,7 +151,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Qube",
-    image: ""
+    images: ""
   },
 
   {
@@ -163,7 +163,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Polysilk",
-    image: ""
+    images: ""
   },
 
   {
@@ -175,7 +175,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Action",
-    image: ""
+    images: ""
   },
 
   {
@@ -187,7 +187,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Action",
-    image: ""
+    images: ""
   },
 
   {
@@ -199,7 +199,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Action",
-    image: ""
+    images: ""
   },
 
   {
@@ -211,7 +211,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Action",
-    image: ""
+    images: ""
   },
 
   {
@@ -223,7 +223,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Action",
-    image: ""
+    images: ""
   },
 
   {
@@ -235,7 +235,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    images: ""
   },
 
   {
@@ -247,7 +247,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    images: ""
   },
 
   {
@@ -259,7 +259,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    images: ""
   },
 
   {
@@ -271,7 +271,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    images: ""
   },
 
   {
@@ -283,7 +283,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    images: ""
   },
 
   {
@@ -295,7 +295,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    images: ""
   },
 
   {
@@ -307,7 +307,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    images: ""
   },
 
   {
@@ -319,7 +319,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    images: ""
   },
 
   {
@@ -331,7 +331,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    images: ""
   },
 
   {
@@ -348,7 +348,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    image: [
+    images: [
       "",
       "",
     ]
@@ -363,7 +363,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Shamrock",
-    image: ""
+    images: ""
   },
 
   {
@@ -375,7 +375,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Excel",
-    image: ""
+    images: ""
   },
 
   {
@@ -387,7 +387,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     BRAND: "Walletz",
-    image: ""
+    images: ""
   },
 
   {
@@ -399,7 +399,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Icon",
-    image: ""
+    images: ""
   },
 ];
 
@@ -419,12 +419,14 @@ function renderBestsellers() {
 }
 
 // Card template
+//<img src="${Array.isArray(product.images) ? product.images[0] : product.image}" alt="${product.name}" loading="lazy">
+function cartItemRowHTML(item, product) {
 function productCardHTML(p) {
   const imgSrc = p.image || 'assets/placeholder.jpg';
   return `
     <article class="product" data-id="${p.id}">
       <a href="product.html?id=${encodeURIComponent(p.id)}">
-        <img src="${imgSrc}" alt="${p.name}">
+        <img src="${Array.isArray(product.images) ? product.images[0] : product.image}" alt="${product.name}" loading="lazy">
       </a>
       <div class="meta">
         <div class="title">
@@ -518,8 +520,7 @@ function renderCatalog() {
 }
 
 // CART PAGE RENDERING -----------------------------------------
-//<img src="${Array.isArray(product.images) ? product.images[0] : product.image}" alt="${product.name}" loading="lazy">
-function cartItemRowHTML(item, product) {
+
   const subtotal = product.price * (item.qty || 1);
   return `
     <div class="cart-row" data-id="${item.id}">
