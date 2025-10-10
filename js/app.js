@@ -15,7 +15,7 @@ const PRODUCTS = [
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
     brand: "Ultra Stretch",
-    image: [
+    images: [
       "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Box.jpg",
       "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Front.jpg",
       "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Vert.jpg"
