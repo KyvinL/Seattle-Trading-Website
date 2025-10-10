@@ -15,7 +15,7 @@ const PRODUCTS = [
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
     brand: "Ultra Stretch",
-    images: [
+    image: [
       "assets/UltraStretch/MilkyWhite/Length12/Box.jpg",
       "assets/UltraStretch/MilkyWhite/Length12/Front.jpg",
       "assets/UltraStretch/MilkyWhite/Length12/Vert.jpg"
@@ -31,7 +31,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: "assets/Excel Nitril Medium 2.png"
+    image: "assets/Excel Nitril Medium 2.png"
   },
 
   {
@@ -43,7 +43,7 @@ const PRODUCTS = [
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
     brand: "Ultra Stretch",
-    images: ""
+    image: ""
   },
 
   {
@@ -55,7 +55,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: ""
+    image: ""
   },
 
   {
@@ -67,7 +67,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: ""
+    image: ""
   },
 
   {
@@ -79,7 +79,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: ""
+    image: ""
   },
 
   {
@@ -91,7 +91,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: ""
+    image: ""
   },
 
   {
@@ -103,7 +103,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: ""
+    image: ""
   },
 
   {
@@ -115,7 +115,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: ""
+    image: ""
   },
 
   {
@@ -127,7 +127,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Qube",
-    images: ""
+    image: ""
   },
 
   {
@@ -139,7 +139,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand:"Qube",
-    images: ""
+    image: ""
   },
 
   {
@@ -151,7 +151,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Qube",
-    images: ""
+    image: ""
   },
 
   {
@@ -163,7 +163,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Polysilk",
-    images: ""
+    image: ""
   },
 
   {
@@ -175,7 +175,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Action",
-    images: ""
+    image: ""
   },
 
   {
@@ -187,7 +187,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Action",
-    images: ""
+    image: ""
   },
 
   {
@@ -199,7 +199,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Action",
-    images: ""
+    image: ""
   },
 
   {
@@ -211,7 +211,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Action",
-    images: ""
+    image: ""
   },
 
   {
@@ -223,7 +223,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Action",
-    images: ""
+    image: ""
   },
 
   {
@@ -235,7 +235,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -247,7 +247,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -259,7 +259,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -271,7 +271,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -283,7 +283,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -295,7 +295,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -307,7 +307,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -319,7 +319,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -331,7 +331,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -348,7 +348,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    images: [
+    image: [
       "",
       "",
     ]
