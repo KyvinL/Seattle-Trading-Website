@@ -31,7 +31,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: "assets/Excel Nitril Medium 2.png"
+    images: "assets/UltraStretch/Ice Blue/Pro 3.5/ultra stretch 3.5 series ice blue.png"
   },
 
   {
