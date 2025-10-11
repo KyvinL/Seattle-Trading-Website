@@ -27,12 +27,16 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ["assets/UltraStretch/MilkyWhite/Length12/Box.jpg"],
+
     colors: [
       {
         name: "Ice Bluee",
         images: ["assets/UltraStretch/MilkyWhite/Length12/Vert.jpg"]
       },
+      {
+        name: "fdsa",
+        images: ["assets/UltraStretch/MilkyWhite/Length12/Box.jpg"]
+      }
     ]
   },
 
