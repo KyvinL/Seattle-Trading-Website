@@ -420,7 +420,8 @@ function renderBestsellers() {
 
 // Card template
 function productCardHTML(p) {
-  const imgSrc = (p.image && p.images[0]) || p.image || 'assets/placeholder.jpg';
+  const imgSrc = Array.isArray(p.image) ? p.image[0] : (p.image || 'assets/placeholder.jpg');
+
   return `
     <article class="product" data-id="${p.id}">
       <a href="product.html?id=${encodeURIComponent(p.id)}">
