@@ -340,9 +340,9 @@ const PRODUCTS = [
     bestseller: false,
     size: ["S","M","L","XL"],
     colors: [
-      { name: "Blue", image: "assets/Shamrock/Canners/Blue.png"},
-      { name: "Orange", image: "assets/Shamrock/Canners/Orange.png"},
-      { name: "Yellow", image: "assets/Shamrock/Canners/Yellow.png"},
+      { name: "Blue", image: "assets/Shamrock/Canners/Case.jpg", "assets/Shamrock/Canners/Blue.png"},
+      { name: "Orange", image: "assets/Shamrock/Canners/Case.jpg", "assets/Shamrock/Canners/Orange.png"},
+      { name: "Yellow", image: "assets/Shamrock/Canners/Case.jpg", "assets/Shamrock/Canners/Yellow.png"},
     ],
     category: "Industrial",
     powderFree: true,
