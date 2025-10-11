@@ -419,7 +419,9 @@ function renderBestsellers() {
 }
 
 function productCardHTML(p) {
-  const imgSrc = p.image || 'assets/placeholder.jpg';
+  const imgSrc = Array.isArray(p.image)
+  ? p.images[0]
+  : p.images || p.image || 'assets/placeholder.jpg'
   return `
     <article class="product" data-id="${p.id}">
       <a href="product.html?id=${encodeURIComponent(p.id)}">
@@ -442,6 +444,9 @@ function productCardHTML(p) {
 // Card template
 //<img src="${Array.isArray(product.images) ? product.images[0] : product.image}" alt="${product.name}" loading="lazy">
 function cartItemRowHTML(item, product) {
+  const imgSrc = Array.isArray(product.images)
+    ? product.images[0]
+    : product.images || product.image || 'assets/placeholder.jpg';
 
 // CART (localStorage) -----------------------------------------
 const CART_KEY = "seattle_trading_cart_v1";
