@@ -575,11 +575,19 @@ label {
   margin-top: 1rem;
 }
 .color-option {
-  border: 1px solid #ccc;
-  background: none;
+  padding: 6px 12px;
+  margin-right: 6px;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  background: var(--card); /* dark background */
+  color: var(--text);      /* light text so it's visible */
   cursor: pointer;
-  padding: 4px;
-  border-radius: 8px;
+  font-weight: 600;
+}
+
+.color-option.active {
+  border: 2px solid var(--accent);
+  font-weight: 700;
 }
 .color-option img {
   width: 40px;
