@@ -1088,91 +1088,110 @@ function renderProductPage() {
   let currentColor = product.colors ? product.colors[0].name : null;
 
   function render() {
-    const mainImage =
-      product.images?.[currentImageIndex] ||
-      (currentColor ? product.colors.find(c => c.name === currentColor)?.image : product.image);
+  const selectedColor = currentColor
+    ? product.colors?.find(c => c.name === currentColor)
+    : null;
 
-    const colorOptions = product.colors
-      ? product.colors
-          .map(
-            (c) => `
-      <button class="color-option ${c.name === currentColor ? 'active' : ''}" data-color="${c.name}">
+  const imageArray = selectedColor?.images || product.images || product.image || [];
+  const mainImage = Array.isArray(imageArray)
+    ? imageArray[currentImageIndex] || imageArray[0]
+    : imageArray;
+
+  // Build color buttons
+  const colorOptions = product.colors
+    ? product.colors
+        .map(
+          (c) => `
+      <button class="color-option ${c.name === currentColor ? 'active' : ''}" 
+              data-color="${c.name}">
         ${c.name}
       </button>`
-          )
-          .join('')
-      : '';
+        )
+        .join('')
+    : '';
 
-    const sizeOptions = product.size
-      ? product.size.map((s) => `<option value="${s}">${s}</option>`).join('')
-      : '';
+  // Build size dropdown
+  const sizeOptions = product.size
+    ? product.size.map((s) => `<option value="${s}">${s}</option>`).join('')
+    : '';
 
-    page.innerHTML = `
-      <div class="product-detail">
-        <div class="image-gallery">
-          <button class="arrow prev">‹</button>
-          <img src="${mainImage}" alt="${product.name}" class="main-image" id="main-image">
-          <button class="arrow next">›</button>
-        </div>
-
-        <div class="info">
-          <h1>${product.name}</h1>
-          <p><strong>Price:</strong> ${formatUSD(product.price)}</p>
-          <p><strong>Material:</strong> ${product.material || 'N/A'}</p>
-
-          ${
-            colorOptions
-              ? `<div class="colors"><strong>Color:</strong> ${colorOptions}</div>`
-              : ''
-          }
-          ${
-            sizeOptions
-              ? `<div class="sizes"><strong>Size:</strong> 
-                <select id="size-select">${sizeOptions}</select></div>`
-              : ''
-          }
-
-          <button class="cta" id="add-to-cart">Add to cart</button>
-        </div>
+  // Inject HTML
+  page.innerHTML = `
+    <div class="product-detail">
+      <div class="image-gallery">
+        <button class="arrow prev">‹</button>
+        <img src="${mainImage}" alt="${product.name}" class="main-image" id="main-image">
+        <button class="arrow next">›</button>
       </div>
-    `;
 
-    // Navigation arrows
-    const prev = page.querySelector('.arrow.prev');
-    const next = page.querySelector('.arrow.next');
-    prev.addEventListener('click', showPrevImage);
-    next.addEventListener('click', showNextImage);
+      <div class="info">
+        <h1>${product.name}</h1>
+        <p><strong>Price:</strong> ${formatUSD(product.price)}</p>
+        <p><strong>Material:</strong> ${product.material || 'N/A'}</p>
 
-    // Color options
-    const colors = page.querySelectorAll('.color-option');
-    colors.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        currentColor = btn.dataset.color;
-        render();
-      });
+        ${
+          colorOptions
+            ? `<div class="colors"><strong>Color:</strong> ${colorOptions}</div>`
+            : ''
+        }
+        ${
+          sizeOptions
+            ? `<div class="sizes"><strong>Size:</strong> 
+                <select id="size-select">${sizeOptions}</select></div>`
+            : ''
+        }
+
+        <button class="cta" id="add-to-cart">Add to cart</button>
+      </div>
+    </div>
+  `;
+
+  // === Event bindings ===
+
+  // Arrows
+  const prev = page.querySelector('.arrow.prev');
+  const next = page.querySelector('.arrow.next');
+  prev.addEventListener('click', showPrevImage);
+  next.addEventListener('click', showNextImage);
+
+  // Color buttons
+  page.querySelectorAll('.color-option').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      currentColor = btn.dataset.color;
+      currentImageIndex = 0; // reset to first image of new color
+      render();
     });
+  });
 
-    // Add to cart
-    const addBtn = page.querySelector('#add-to-cart');
-    addBtn.addEventListener('click', () => addToCart(product.id));
+  // Add to cart
+  page.querySelector('#add-to-cart').addEventListener('click', () =>
+    addToCart(product.id)
+  );
 
-    // Swipe handling
-    const imageEl = page.querySelector('#main-image');
-    addSwipeListeners(imageEl);
-  }
+  // Swipe
+  addSwipeListeners(page.querySelector('#main-image'));
+}
 
-  function showPrevImage() {
-    if (!product.images) return;
-    currentImageIndex =
-      (currentImageIndex - 1 + product.images.length) % product.images.length;
-    render();
-  }
+// Navigation arrows now aware of selected color
+function showPrevImage() {
+  const selectedColor = currentColor
+    ? product.colors?.find(c => c.name === currentColor)
+    : null;
+  const imageArray = selectedColor?.images || product.images || [];
+  if (!imageArray.length) return;
+  currentImageIndex = (currentImageIndex - 1 + imageArray.length) % imageArray.length;
+  render();
+}
 
-  function showNextImage() {
-    if (!product.images) return;
-    currentImageIndex = (currentImageIndex + 1) % product.images.length;
-    render();
-  }
+function showNextImage() {
+  const selectedColor = currentColor
+    ? product.colors?.find(c => c.name === currentColor)
+    : null;
+  const imageArray = selectedColor?.images || product.images || [];
+  if (!imageArray.length) return;
+  currentImageIndex = (currentImageIndex + 1) % imageArray.length;
+  render();
+}
 
   // 👉 Touch swipe events
   function addSwipeListeners(el) {

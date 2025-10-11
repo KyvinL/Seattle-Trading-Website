@@ -569,25 +569,27 @@ label {
 .arrow.prev { left: 10px; }
 .arrow.next { right: 10px; }
 
-.colors {
-  margin-top: 10px;
+.color-selector {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 .color-option {
-  padding: 6px 10px;
-  border: 1px solid var(--muted);
-  background: transparent;
-  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: none;
   cursor: pointer;
-  color: var(--text);
+  padding: 4px;
+  border-radius: 8px;
 }
-.color-option.active {
-  border-color: var(--accent);
-  color: var(--accent);
-  font-weight: 700;
-  background: rgba(37,99,235,0.15);
+.color-option img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.color-option span {
+  display: block;
+  font-size: 0.75rem;
 }
 
 .sizes select {
