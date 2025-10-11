@@ -24,10 +24,6 @@ const PRODUCTS = [
     price: 144.99,
     bestseller: true,
     size: ["XS","S","M","L","XL"],
-    colors: [
-    { name: "Ice Blue", image: "assets/Excel Nitril Medium 2.png" },
-    { name: "Milky White", image: "assets/Excel Nitril Milky.png" }
-    ],
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
@@ -344,14 +340,14 @@ const PRODUCTS = [
     bestseller: false,
     size: ["S","M","L","XL"],
     colors: [
-      { name: "Blue", image: ""},
-      { name: "Orange", image: ""},
-      { name: "Yellow", image: ""},
+      { name: "Blue", image: "assets/Shamrock/Canners/Blue.png"},
+      { name: "Orange", image: "assets/Shamrock/Canners/Orange.png"},
+      { name: "Yellow", image: "assets/Shamrock/Canners/Yellow.png"},
     ],
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    image: [""]
+    image: ["assets/Shamrock/Canners/Case.jpg"]
   },
 
   {
