@@ -10,15 +10,15 @@ const PRODUCTS = [
     id: "us-1000-length-12\"-milky-white",
     name: "Ultra Stretch 1,000 Pcs/Case Nitrile Exam Gloves LENGTH 12\" (Milky White)",
     price: 149.99,
-    bestseller: true,
+    bestseller: false,
     size: ["XS","S","M","L","XL"],
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
     brand: "Ultra Stretch",
     image: [
-      "assets/UltraStretch/MilkyWhite/Length12/Box.jpg",
-      "assets/UltraStretch/MilkyWhite/Length12/Front.jpg",
-      "assets/UltraStretch/MilkyWhite/Length12/Vert.jpg"
+      "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Box.jpg",
+      "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Front.jpg",
+      "assets/Ultra Stretch/Milky White/Length 12/1,000 Pcs Case Nitrile Exam Gloves LENGTH 12'' (Milky White) Vert.jpg"
     ]
   },
 
@@ -31,7 +31,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: "assets/UltraStretch/Ice Blue/Pro 3.5/ultra stretch 3.5 series ice blue.png"
+    image: "assets/Excel Nitril Medium 2.png"
   },
 
   {
@@ -43,7 +43,7 @@ const PRODUCTS = [
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
     brand: "Ultra Stretch",
-    images: ""
+    image: ""
   },
 
   {
@@ -55,7 +55,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: ""
+    image: ""
   },
 
   {
@@ -67,7 +67,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: ""
+    image: ""
   },
 
   {
@@ -79,7 +79,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: ""
+    image: ""
   },
 
   {
@@ -91,7 +91,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: ""
+    image: ""
   },
 
   {
@@ -103,7 +103,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: ""
+    image: ""
   },
 
   {
@@ -115,7 +115,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    images: ""
+    image: ""
   },
 
   {
@@ -127,7 +127,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Qube",
-    images: ""
+    image: ""
   },
 
   {
@@ -139,7 +139,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand:"Qube",
-    images: ""
+    image: ""
   },
 
   {
@@ -151,7 +151,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Qube",
-    images: ""
+    image: ""
   },
 
   {
@@ -163,7 +163,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Polysilk",
-    images: ""
+    image: ""
   },
 
   {
@@ -175,7 +175,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Action",
-    images: ""
+    image: ""
   },
 
   {
@@ -187,7 +187,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Action",
-    images: ""
+    image: ""
   },
 
   {
@@ -199,7 +199,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Action",
-    images: ""
+    image: ""
   },
 
   {
@@ -211,7 +211,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Action",
-    images: ""
+    image: ""
   },
 
   {
@@ -223,7 +223,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Action",
-    images: ""
+    image: ""
   },
 
   {
@@ -235,7 +235,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -247,7 +247,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -259,7 +259,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -271,7 +271,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -283,7 +283,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -295,7 +295,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -307,7 +307,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -319,7 +319,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -331,7 +331,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -348,7 +348,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    images: [
+    image: [
       "",
       "",
     ]
@@ -363,7 +363,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Shamrock",
-    images: ""
+    image: ""
   },
 
   {
@@ -375,7 +375,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Excel",
-    images: ""
+    image: ""
   },
 
   {
@@ -387,7 +387,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     BRAND: "Walletz",
-    images: ""
+    image: ""
   },
 
   {
@@ -399,7 +399,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Icon",
-    images: ""
+    image: ""
   },
 ];
 
@@ -418,10 +418,9 @@ function renderBestsellers() {
   mount.innerHTML = best.map(p => productCardHTML(p)).join('');
 }
 
+// Card template
 function productCardHTML(p) {
-  const imgSrc = Array.isArray(p.image)
-  ? p.images[0]
-  : p.images || p.image || 'assets/placeholder.jpg'
+  const imgSrc = p.image || 'assets/placeholder.jpg';
   return `
     <article class="product" data-id="${p.id}">
       <a href="product.html?id=${encodeURIComponent(p.id)}">
@@ -440,13 +439,6 @@ function productCardHTML(p) {
     </article>
   `;
 }
-
-// Card template
-//<img src="${Array.isArray(product.images) ? product.images[0] : product.image}" alt="${product.name}" loading="lazy">
-function cartItemRowHTML(item, product) {
-  const imgSrc = Array.isArray(product.images)
-    ? product.images[0]
-    : product.images || product.image || 'assets/placeholder.jpg';
 
 // CART (localStorage) -----------------------------------------
 const CART_KEY = "seattle_trading_cart_v1";
@@ -526,7 +518,7 @@ function renderCatalog() {
 }
 
 // CART PAGE RENDERING -----------------------------------------
-
+function cartItemRowHTML(item, product) {
   const subtotal = product.price * (item.qty || 1);
   return `
     <div class="cart-row" data-id="${item.id}">
