@@ -27,7 +27,13 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ["assets/UltraStretch/MilkyWhite/Length12/Box.jpg"]
+    image: ["assets/UltraStretch/MilkyWhite/Length12/Box.jpg"],
+    colors: [
+      {
+        name: "Ice Bluee",
+        images: ["assets/UltraStretch/MilkyWhite/Length12/Vert.jpg"]
+      },
+    ]
   },
 
   {
@@ -1052,40 +1058,49 @@ payBtn?.addEventListener('click', startPayment);
 
 // Rendering Products on product.html
 function renderProductPage() {
-  const page = document.getElementById('product-page');
+  const page = document.getElementById("product-page");
   if (!page) return;
 
   const params = new URLSearchParams(window.location.search);
-  const id = params.get('id');
-  const product = PRODUCTS.find(p => p.id === id);
+  const id = params.get("id");
+  const product = PRODUCTS.find((p) => p.id === id);
 
   if (!product) {
-    page.innerHTML = '<p>Product not found.</p>';
+    page.innerHTML = "<p>Product not found.</p>";
     return;
   }
 
-  let currentImageIndex = 0;
+  // ---- defaults ----
   let currentColor = product.colors ? product.colors[0].name : null;
+  let currentImageIndex = 0;
 
+  function getCurrentImages() {
+    if (product.colors) {
+      const color = product.colors.find((c) => c.name === currentColor);
+      if (color && color.images) return color.images;
+    }
+    return product.images || [product.image];
+  }
+
+  // ---- render loop ----
   function render() {
-    const mainImage =
-      product.images?.[currentImageIndex] ||
-      (currentColor ? product.colors.find(c => c.name === currentColor)?.image : product.image);
+    const images = getCurrentImages();
+    const mainImage = images[currentImageIndex] || images[0];
 
     const colorOptions = product.colors
       ? product.colors
           .map(
             (c) => `
-      <button class="color-option ${c.name === currentColor ? 'active' : ''}" data-color="${c.name}">
+      <button class="color-option ${c.name === currentColor ? "active" : ""}" data-color="${c.name}">
         ${c.name}
       </button>`
           )
-          .join('')
-      : '';
+          .join("")
+      : "";
 
     const sizeOptions = product.size
-      ? product.size.map((s) => `<option value="${s}">${s}</option>`).join('')
-      : '';
+      ? product.size.map((s) => `<option value="${s}">${s}</option>`).join("")
+      : "";
 
     page.innerHTML = `
       <div class="product-detail">
@@ -1098,18 +1113,18 @@ function renderProductPage() {
         <div class="info">
           <h1>${product.name}</h1>
           <p><strong>Price:</strong> ${formatUSD(product.price)}</p>
-          <p><strong>Material:</strong> ${product.material || 'N/A'}</p>
+          <p><strong>Material:</strong> ${product.material || "N/A"}</p>
 
           ${
             colorOptions
               ? `<div class="colors"><strong>Color:</strong> ${colorOptions}</div>`
-              : ''
+              : ""
           }
           ${
             sizeOptions
               ? `<div class="sizes"><strong>Size:</strong> 
                 <select id="size-select">${sizeOptions}</select></div>`
-              : ''
+              : ""
           }
 
           <button class="cta" id="add-to-cart">Add to cart</button>
@@ -1117,60 +1132,56 @@ function renderProductPage() {
       </div>
     `;
 
-    // Navigation arrows
-    const prev = page.querySelector('.arrow.prev');
-    const next = page.querySelector('.arrow.next');
-    prev.addEventListener('click', showPrevImage);
-    next.addEventListener('click', showNextImage);
+    // --- events ---
+    page.querySelector(".arrow.prev")?.addEventListener("click", showPrevImage);
+    page.querySelector(".arrow.next")?.addEventListener("click", showNextImage);
 
-    // Color options
-    const colors = page.querySelectorAll('.color-option');
-    colors.forEach((btn) => {
-      btn.addEventListener('click', () => {
+    const colorBtns = page.querySelectorAll(".color-option");
+    colorBtns.forEach((btn) =>
+      btn.addEventListener("click", () => {
         currentColor = btn.dataset.color;
+        currentImageIndex = 0; // reset gallery
         render();
-      });
-    });
+      })
+    );
 
-    // Add to cart
-    const addBtn = page.querySelector('#add-to-cart');
-    addBtn.addEventListener('click', () => addToCart(product.id));
+    page.querySelector("#add-to-cart")?.addEventListener("click", () =>
+      addToCart(product.id)
+    );
 
-    // Swipe handling
-    const imageEl = page.querySelector('#main-image');
-    addSwipeListeners(imageEl);
+    // swipe
+    const imgEl = page.querySelector("#main-image");
+    addSwipeListeners(imgEl);
   }
 
   function showPrevImage() {
-    if (!product.images) return;
-    currentImageIndex =
-      (currentImageIndex - 1 + product.images.length) % product.images.length;
+    const imgs = getCurrentImages();
+    currentImageIndex = (currentImageIndex - 1 + imgs.length) % imgs.length;
     render();
   }
 
   function showNextImage() {
-    if (!product.images) return;
-    currentImageIndex = (currentImageIndex + 1) % product.images.length;
+    const imgs = getCurrentImages();
+    currentImageIndex = (currentImageIndex + 1) % imgs.length;
     render();
   }
 
-  // 👉 Touch swipe events
+  // swipe helper
   function addSwipeListeners(el) {
     let startX = 0;
     let endX = 0;
 
-    el.addEventListener('touchstart', (e) => {
+    el.addEventListener("touchstart", (e) => {
       startX = e.touches[0].clientX;
     });
 
-    el.addEventListener('touchmove', (e) => {
+    el.addEventListener("touchmove", (e) => {
       endX = e.touches[0].clientX;
     });
 
-    el.addEventListener('touchend', () => {
+    el.addEventListener("touchend", () => {
       const diff = startX - endX;
       if (Math.abs(diff) > 50) {
-        // Swipe threshold
         if (diff > 0) showNextImage();
         else showPrevImage();
       }
