@@ -27,7 +27,10 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ["assets/UltraStretch/MilkyWhite/Length12/Box.jpg"]
+    image: [
+      "assets/Ultra Stretch/Ice Blue/Pro 3.5/2,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Ice Blue) Case.jpg",
+      "assets/Ultra Stretch/Ice Blue/Pro 3.5/2,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Ice Blue) Box.jpg"
+    ]
   },
 
   {
