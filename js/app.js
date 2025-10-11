@@ -10,12 +10,12 @@ const PRODUCTS = [
     id: "us-1000-length-12\"-milky-white",
     name: "Ultra Stretch 1,000 Pcs/Case Nitrile Exam Gloves LENGTH 12\" (Milky White)",
     price: 149.99,
-    bestseller: false,
+    bestseller: true,
     size: ["XS","S","M","L","XL"],
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
     brand: "Ultra Stretch",
-    images: [
+    image: [
       "assets/UltraStretch/MilkyWhite/Length12/Box.jpg",
       "assets/UltraStretch/MilkyWhite/Length12/Front.jpg",
       "assets/UltraStretch/MilkyWhite/Length12/Vert.jpg"
