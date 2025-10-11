@@ -24,6 +24,10 @@ const PRODUCTS = [
     price: 144.99,
     bestseller: true,
     size: ["XS","S","M","L","XL"],
+    colors: [
+    { name: "Ice Blue", image: "assets/Excel Nitril Medium 2.png" },
+    { name: "Milky White", image: "assets/Excel Nitril Milky.png" }
+    ],
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
