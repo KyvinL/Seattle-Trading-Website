@@ -15,7 +15,7 @@ const PRODUCTS = [
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
     brand: "Ultra Stretch",
-    image:""
+    image: [""]
   },
 
   {
@@ -27,7 +27,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: "assets/UltraStretch/MilkyWhite/Length12/Box.jpg"
+    image: ["assets/UltraStretch/MilkyWhite/Length12/Box.jpg"]
   },
 
   {
@@ -39,7 +39,7 @@ const PRODUCTS = [
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    image: [""]
   },
 
   {
@@ -51,7 +51,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    image: [""]
   },
 
   {
@@ -63,7 +63,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    image: [""]
   },
 
   {
@@ -75,7 +75,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    image: [""]
   },
 
   {
@@ -87,7 +87,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    image: [""]
   },
 
   {
@@ -99,7 +99,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    image: [""]
   },
 
   {
@@ -111,7 +111,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: ""
+    image: [""]
   },
 
   {
@@ -123,7 +123,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Qube",
-    image: ""
+    image: [""]
   },
 
   {
@@ -135,7 +135,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand:"Qube",
-    image: ""
+    image: [""]
   },
 
   {
@@ -147,7 +147,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Qube",
-    image: ""
+    image: [""]
   },
 
   {
@@ -159,7 +159,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Polysilk",
-    image: ""
+    image: [""]
   },
 
   {
@@ -171,7 +171,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Action",
-    image: ""
+    image: [""]
   },
 
   {
@@ -183,7 +183,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Action",
-    image: ""
+    image: [""]
   },
 
   {
@@ -195,7 +195,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Action",
-    image: ""
+    image: [""]
   },
 
   {
@@ -207,7 +207,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Action",
-    image: ""
+    image: [""]
   },
 
   {
@@ -219,7 +219,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Action",
-    image: ""
+    image: [""]
   },
 
   {
@@ -231,7 +231,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    image: [""]
   },
 
   {
@@ -243,7 +243,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    image: [""]
   },
 
   {
@@ -255,7 +255,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    image: [""]
   },
 
   {
@@ -267,7 +267,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    image: [""]
   },
 
   {
@@ -279,7 +279,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    image: [""]
   },
 
   {
@@ -291,7 +291,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    image: [""]
   },
 
   {
@@ -303,7 +303,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    image: [""]
   },
 
   {
@@ -315,7 +315,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    image: [""]
   },
 
   {
@@ -327,7 +327,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    image: ""
+    image: [""]
   },
 
   {
@@ -344,10 +344,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: true,
     brand: "Shamrock",
-    image: [
-      "",
-      "",
-    ]
+    image: [""]
   },
 
   {
@@ -359,7 +356,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Shamrock",
-    image: ""
+    image: [""]
   },
 
   {
@@ -371,7 +368,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Excel",
-    image: ""
+    image: [""]
   },
 
   {
@@ -383,7 +380,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     BRAND: "Walletz",
-    image: ""
+    image: [""]
   },
 
   {
@@ -395,7 +392,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Icon",
-    image: ""
+    image: [""]
   },
 ];
 
@@ -416,7 +413,7 @@ function renderBestsellers() {
 
 // Card template
 function productCardHTML(p) {
-  const imgSrc = p.image || 'assets/placeholder.jpg';
+  const imgSrc = (p.image && p.images[0]) || p.image || 'assets/placeholder.jpg';
   return `
     <article class="product" data-id="${p.id}">
       <a href="product.html?id=${encodeURIComponent(p.id)}">
