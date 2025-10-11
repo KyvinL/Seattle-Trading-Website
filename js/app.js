@@ -418,9 +418,6 @@ function renderBestsellers() {
   mount.innerHTML = best.map(p => productCardHTML(p)).join('');
 }
 
-// Card template
-//<img src="${Array.isArray(product.images) ? product.images[0] : product.image}" alt="${product.name}" loading="lazy">
-function cartItemRowHTML(item, product) {
 function productCardHTML(p) {
   const imgSrc = p.image || 'assets/placeholder.jpg';
   return `
@@ -441,6 +438,10 @@ function productCardHTML(p) {
     </article>
   `;
 }
+
+// Card template
+//<img src="${Array.isArray(product.images) ? product.images[0] : product.image}" alt="${product.name}" loading="lazy">
+function cartItemRowHTML(item, product) {
 
 // CART (localStorage) -----------------------------------------
 const CART_KEY = "seattle_trading_cart_v1";
