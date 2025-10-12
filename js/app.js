@@ -458,7 +458,7 @@ function productCardHTML(p) {
   return `
     <article class="product" data-id="${p.id}">
       <a href="product.html?id=${encodeURIComponent(p.id)}">
-        <img loading="lazy" src="${imgSrc}" alt="${p.name}">
+        <img src="${imgSrc}" alt="${p.name}">
       </a>
       <div class="meta">
         <div class="title">
