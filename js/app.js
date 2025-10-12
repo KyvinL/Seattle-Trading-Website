@@ -34,9 +34,9 @@ const PRODUCTS = [
     images: [
       "assets/Ultra Stretch/Ice Blue/Pro 3.5/2,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Ice Blue) Case Front.jpg",
       "assets/Ultra Stretch/Ice Blue/Pro 3.5/2,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Ice Blue) Case.jpg",
-      "assets/Ultra Stretch/Ice Blue/Pro 3.5/2,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Ice Blue) Case Side.jpg",
+      "assets/Ultra Stretch/Ice Blue/Pro 3.5/2,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Ice Blue) Case Side.png",
       "assets/Ultra Stretch/Ice Blue/Pro 3.5/2,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Ice Blue) Box.jpg",
-      "assets/Ultra Stretch/Ice Blue/Pro 3.5/2,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Ice Blue) Hands.jpg"
+      "assets/Ultra Stretch/Ice Blue/Pro 3.5/2,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Ice Blue) Hands.png"
     ]
   },
 
@@ -67,9 +67,9 @@ const PRODUCTS = [
     images: [
       "assets/Ultra Stretch/Hot Pink/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Hot Pink) Case Front.jpg",
       "assets/Ultra Stretch/Hot Pink/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Hot Pink) Case.jpg",
-      "assets/Ultra Stretch/Hot Pink/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Hot Pink) Case Side",
-      "assets/Ultra Stretch/Hot Pink/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Hot Pink) Box",
-      "assets/Ultra Stretch/Hot Pink/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Hot Pink) Hands"
+      "assets/Ultra Stretch/Hot Pink/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Hot Pink) Case Side.png",
+      "assets/Ultra Stretch/Hot Pink/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Hot Pink) Box.jpg",
+      "assets/Ultra Stretch/Hot Pink/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Hot Pink) Hands.png"
     ]
   },
 
@@ -83,8 +83,8 @@ const PRODUCTS = [
     powderFree: false,
     brand: "Ultra Stretch",
     images: [
-      "assets/Ultra Stretch/Cobalt Blue/Pro 3.0/2,000 Pcs Case Nitrile Exam Gloves PRO 3.0 (Cobalt Blue) Case Front.jpg",
-      "assets/Ultra Stretch/Cobalt Blue/Pro 3.0/2,000 Pcs Case Nitrile Exam Gloves PRO 3.0 (Cobalt Blue) Case.jpg",
+      "assets/Ultra Stretch/Cobalt Blue/Pro 3.0/2,000 Pcs Case Nitrile Exam Gloves PRO 3.0 (Cobalt Blue) Case Front.jpeg",
+      "assets/Ultra Stretch/Cobalt Blue/Pro 3.0/2,000 Pcs Case Nitrile Exam Gloves PRO 3.0 (Cobalt Blue) Case.jpeg",
       "assets/Ultra Stretch/Cobalt Blue/Pro 3.0/2,000 Pcs Case Nitrile Exam Gloves PRO 3.0 (Cobalt Blue) Box.jpg"
     ]
   },
@@ -101,7 +101,7 @@ const PRODUCTS = [
     images: [
       "assets/Ultra Stretch/Coal Black/Pro 6.0/1,000 Pcs Case Nitrile Exam Gloves PRO 6.0 (Coal Black) Case Front.jpg",
       "assets/Ultra Stretch/Coal Black/Pro 6.0/1,000 Pcs Case Nitrile Exam Gloves PRO 6.0 (Coal Black) Case.jpg",
-      "assets/Ultra Stretch/Coal Black/Pro 6.0/1,000 Pcs Case Nitrile Exam Gloves PRO 6.0 (Coal Black) Box"
+      "assets/Ultra Stretch/Coal Black/Pro 6.0/1,000 Pcs Case Nitrile Exam Gloves PRO 6.0 (Coal Black) Box.jpg"
     ]
   },
 
@@ -134,8 +134,8 @@ const PRODUCTS = [
       "assets/Ultra Stretch/Coal Black/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Coal Black) Case Front.jpg",
       "assets/Ultra Stretch/Coal Black/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Coal Black) Case.jpg",
       "assets/Ultra Stretch/Coal Black/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Coal Black) Case Side.jpg",
-      "assets/Ultra Stretch/Coal Black/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Coal Black) Box",
-      "assets/Ultra Stretch/Coal Black/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Coal Black) Hands"
+      "assets/Ultra Stretch/Coal Black/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Coal Black) Box.jpg",
+      "assets/Ultra Stretch/Coal Black/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Coal Black) Hands.png"
     ]
   },
 
