@@ -453,7 +453,6 @@ function renderBestsellers() {
 
 // Card template
 function productCardHTML(p) {
-  
   const imgSrc = Array.isArray(p.image) ? p.image[0] : (p.image || 'assets/placeholder.jpg');
 
   return `
