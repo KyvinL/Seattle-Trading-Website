@@ -148,7 +148,9 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Qube",
-    image: [""]
+    images: [
+      "assets/Qube/Qube Latex Powder/Qube Latex Examination Powdered Gloves"
+    ]
   },
 
   {
@@ -160,7 +162,10 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand:"Qube",
-    image: [""]
+    images: [
+      "assets/Qube/Qube Nitrile Exam/Qube Nitrile Examination Gloves",
+      "assets/Qube/Qube Nitrile Exam/Qube Nitrile Examination Gloves Case"
+    ]
   },
 
   {
@@ -172,7 +177,9 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: true,
     brand: "Qube",
-    image: [""]
+    image: [
+      "assets/Qube/Qube Latex Powder Free/Qube Latex Examination Powder Free Gloves"
+    ]
   },
 
   {
@@ -451,7 +458,7 @@ function renderBestsellers() {
   mount.innerHTML = best.map(p => productCardHTML(p)).join('');
 }
 
-// Card template
+// Card template --- Looks for an image...if no image => assets/placeholder.jpg
 function productCardHTML(p) {
   const firstValidImage =
     (Array.isArray(p.images) && p.images[0]) ? p.images[0] :
