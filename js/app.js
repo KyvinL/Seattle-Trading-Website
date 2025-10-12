@@ -419,7 +419,7 @@ const PRODUCTS = [
     size: ["XS","S","M","L","XL"],
     category: "Medical",
     powderFree: false,
-    BRAND: "Walletz",
+    brand: "Walletz",
     image: [""]
   },
 
@@ -454,7 +454,7 @@ function renderBestsellers() {
 // Card template
 function productCardHTML(p) {
   
-  const imgSrc = Array.isArray(p.image) ? p.image[0] : (p.image || 'assets/placeholder.jpg');
+  const imgSrc = Array.isArray(product.image) ? product.image[0] : (product.image || 'assets/placeholder.jpg');
 
   return `
     <article class="product" data-id="${p.id}">
@@ -1114,7 +1114,7 @@ function renderProductPage() {
     ? product.colors?.find(c => c.name === currentColor)
     : null;
 
-  const imageArray = selectedColor?.images || product.images || product.image || [];
+  const imageArray = selectedColor?.images || product.images || (Array.isArray(product.image) ? product.image : [product.image]) || [];
   const mainImage = Array.isArray(imageArray)
     ? imageArray[currentImageIndex] || imageArray[0]
     : imageArray;
@@ -1199,7 +1199,7 @@ function showPrevImage() {
   const selectedColor = currentColor
     ? product.colors?.find(c => c.name === currentColor)
     : null;
-  const imageArray = selectedColor?.images || product.images || [];
+  const imageArray = selectedColor?.images || product.images || (Array.isArray(product.image) ? product.image : [product.image]) || [];
   if (!imageArray.length) return;
   currentImageIndex = (currentImageIndex - 1 + imageArray.length) % imageArray.length;
   render();
@@ -1209,7 +1209,7 @@ function showNextImage() {
   const selectedColor = currentColor
     ? product.colors?.find(c => c.name === currentColor)
     : null;
-  const imageArray = selectedColor?.images || product.images || [];
+  const imageArray = selectedColor?.images || product.images || (Array.isArray(product.image) ? product.image : [product.image]) || [];
   if (!imageArray.length) return;
   currentImageIndex = (currentImageIndex + 1) % imageArray.length;
   render();
