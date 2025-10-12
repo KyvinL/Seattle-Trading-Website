@@ -609,6 +609,8 @@ label {
   color: var(--text);
 }
 
+/* Mobile Styles */
+
 /* Mobile Image Swiping */
 .image-gallery {
   position: relative;
