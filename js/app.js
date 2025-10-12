@@ -16,7 +16,7 @@ const PRODUCTS = [
     powderFree: false,
     brand: "Ultra Stretch",
     images: [
-      "assets/Ultra Stretch/Milky White/Pro 12in/1,000 Pcs Case Nitrile Exam Gloves Pro 12in (Milky White) Case Front.jpg",
+      "assets/Ultra Stretch/Ice Blue/Pro 3.5/2,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Ice Blue) Case Front.jpg",
       "assets/Ultra Stretch/Milky White/Pro 12in/1,000 Pcs Case Nitrile Exam Gloves Pro 12in (Milky White) Case.jpg",
       "assets/Ultra Stretch/Milky White/Pro 12in/1,000 Pcs Case Nitrile Exam Gloves Pro 12in (Milky White) Box.jpg"
     ]
