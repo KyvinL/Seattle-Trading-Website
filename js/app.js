@@ -453,17 +453,16 @@ function renderBestsellers() {
 
 // Card template
 function productCardHTML(p) {
-  const imgSrc =
-    (Array.isArray(p.images) && p.images.length > 0)
-      ? p.images[0]
-      : (Array.isArray(p.image) && p.image.length > 0)
-        ? p.image[0]
-        : p.image || 'assets/placeholder.jpg';
+  const firstValidImage =
+    (Array.isArray(p.images) && p.images[0]) ? p.images[0] :
+    (Array.isArray(p.image) && p.image[0]) ? p.image[0] :
+    (typeof p.image === 'string' && p.image.trim() !== '') ? p.image :
+    'assets/placeholder.jpg';
 
   return `
     <article class="product" data-id="${p.id}">
       <a href="product.html?id=${encodeURIComponent(p.id)}">
-        <img src="${imgSrc}" alt="${p.name}">
+        <img src="${firstValidImage}" alt="${p.name}">
       </a>
       <div class="meta">
         <div class="title">
