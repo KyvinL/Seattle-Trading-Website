@@ -15,7 +15,7 @@ const PRODUCTS = [
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
     brand: "Ultra Stretch",
-    image: [
+    images: [
       "assets/Ultra Stretch/Milky White/Pro 12in/1,000 Pcs Case Nitrile Exam Gloves Pro 12in (Milky White) Case Front.jpg",
       "assets/Ultra Stretch/Milky White/Pro 12in/1,000 Pcs Case Nitrile Exam Gloves Pro 12in (Milky White) Case.jpg",
       "assets/Ultra Stretch/Milky White/Pro 12in/1,000 Pcs Case Nitrile Exam Gloves Pro 12in (Milky White) Box.jpg"
@@ -49,7 +49,7 @@ const PRODUCTS = [
     category: ["Chemo Rated", "Medical"],
     powderFree: false,
     brand: "Ultra Stretch",
-    image: [
+    images: [
       "assets/Ultra Stretch/Hot Pink/Pro 12in/1,000 Pcs Case Nitrile Exam Gloves Pro 12in (Hot Pink) Case Front.jpg",
       "assets/Ultra Stretch/Hot Pink/Pro 12in/1,000 Pcs Case Nitrile Exam Gloves Pro 12in (Hot Pink) Box.jpg"
     ]
@@ -64,7 +64,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: [
+    images: [
       "assets/Ultra Stretch/Hot Pink/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Hot Pink) Case Front.jpg",
       "assets/Ultra Stretch/Hot Pink/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Hot Pink) Case.jpg",
       "assets/Ultra Stretch/Hot Pink/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Hot Pink) Case Side",
@@ -82,7 +82,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: [
+    images: [
       "assets/Ultra Stretch/Cobalt Blue/Pro 3.0/2,000 Pcs Case Nitrile Exam Gloves PRO 3.0 (Cobalt Blue) Case Front.jpg",
       "assets/Ultra Stretch/Cobalt Blue/Pro 3.0/2,000 Pcs Case Nitrile Exam Gloves PRO 3.0 (Cobalt Blue) Case.jpg",
       "assets/Ultra Stretch/Cobalt Blue/Pro 3.0/2,000 Pcs Case Nitrile Exam Gloves PRO 3.0 (Cobalt Blue) Box.jpg"
@@ -98,7 +98,7 @@ const PRODUCTS = [
     category: "Industrial",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: [
+    images: [
       "assets/Ultra Stretch/Coal Black/Pro 6.0/1,000 Pcs Case Nitrile Exam Gloves PRO 6.0 (Coal Black) Case Front.jpg",
       "assets/Ultra Stretch/Coal Black/Pro 6.0/1,000 Pcs Case Nitrile Exam Gloves PRO 6.0 (Coal Black) Case.jpg",
       "assets/Ultra Stretch/Coal Black/Pro 6.0/1,000 Pcs Case Nitrile Exam Gloves PRO 6.0 (Coal Black) Box"
@@ -114,7 +114,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: [
+    images: [
       "assets/Ultra Stretch/Coal Black/Pro 5.0/1,000 Pcs Case Nitrile Exam Gloves PRO 5.0 (Coal Black) Case Front.jpg",
       "assets/Ultra Stretch/Coal Black/Pro 5.0/1,000 Pcs Case Nitrile Exam Gloves PRO 5.0 (Coal Black) Case.jpg",
       "assets/Ultra Stretch/Coal Black/Pro 5.0/1,000 Pcs Case Nitrile Exam Gloves PRO 5.0 (Coal Black) Box.jpg"
@@ -130,7 +130,7 @@ const PRODUCTS = [
     category: "Medical",
     powderFree: false,
     brand: "Ultra Stretch",
-    image: [
+    images: [
       "assets/Ultra Stretch/Coal Black/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Coal Black) Case Front.jpg",
       "assets/Ultra Stretch/Coal Black/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Coal Black) Case.jpg",
       "assets/Ultra Stretch/Coal Black/Pro 3.5/1,000 Pcs Case Nitrile Exam Gloves PRO 3.5 (Coal Black) Case Side.jpg",
