@@ -453,7 +453,12 @@ function renderBestsellers() {
 
 // Card template
 function productCardHTML(p) {
-  const imgSrc = Array.isArray(p.image) ? p.image[0] : (p.image || 'assets/placeholder.jpg');
+  const imgSrc =
+    (Array.isArray(p.images) && p.images.length > 0)
+      ? p.images[0]
+      : (Array.isArray(p.image) && p.image.length > 0)
+        ? p.image[0]
+        : p.image || 'assets/placeholder.jpg';
 
   return `
     <article class="product" data-id="${p.id}">
